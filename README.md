@@ -1,5 +1,6 @@
 # Barter Bin Web Application 
 ## Software Development Capstone Project for Maryville University
+### By: Arnetta Knight
 
 ![barter-bin-high-resolution-logo-color-on-transparent-background](https://user-images.githubusercontent.com/40047791/228896207-df35ee15-4e7b-4299-9c4b-6ce84aa8e23d.png)
 
