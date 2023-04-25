@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <?php
 
 require_once('db-include/config.php');
@@ -9,7 +11,6 @@ if (isset($_POST['needs'])) {
 
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
