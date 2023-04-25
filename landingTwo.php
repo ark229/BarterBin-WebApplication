@@ -8,37 +8,11 @@ require_once('db-include/session.php');
 if (!isset($_SESSION['needs']))
   header("location: /index.php");
 
-$first_name = $_POST['first_name'];
-$last_name = $_POST['last_name'];
-$email = $_POST['email'];
-$city = $_POST['city'];
-$state = $_POST['state'];
-$password = $_POST['password'];
-
-// Hash the password for security
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-// Check if the user already exists
-$sql = "SELECT * FROM users WHERE email = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$email]);
-
-if ($stmt->rowCount() > 0) {
-  echo "User already exists with this email.";
-} else {
-  // Insert the new user into the database
-  $sql = "INSERT INTO users (first_name, last_name, email, city, state, password, date_added) VALUES (?, ?, ?, ?, ?, ?, NOW())";
-  $db->query($query);
-  $stmt = $pdo->prepare($sql);
-  $result = $stmt->execute([$first_name, $last_name, $email, $city, $state, $hashed_password]);
-
-  if ($result) {
-    echo "Welcome to Barter Bin. Please <a href='login.php'>login</a>.";
-  } else {
-    echo "Registration failed. Please try again.";
-  }
+if (isset($_SESSION['success_message'])) {
+  echo "<p>" . $_SESSION['success_message'] . "</p>";
+  // Remove the session variable after displaying the message
+  unset($_SESSION['success_message']);
 }
-
 
 ?>
 
@@ -104,7 +78,7 @@ if ($stmt->rowCount() > 0) {
       <div class="col-md-4"></div>
       <div class="col-md-4" style="margin-left: 45px">
 
-        <form action="login.php" method="POST">
+        <form action="db-include/submit.php" method="POST">
           <input class="form-control form-control-lg" name="first_name" type="text" style="
                 width: 300px;
                 height: 53px;
