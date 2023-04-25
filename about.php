@@ -20,21 +20,21 @@
       <div class="collapse navbar-collapse" id="navcol-2">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="register.html" style="
+            <a class="nav-link active" href="register.php" style="
                   font-weight: bold;
                   color: var(--bs-green);
                   font-size: 20px;
                 ">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html" style="
+            <a class="nav-link" href="login.php" style="
                   color: var(--bs-green);
                   font-weight: bold;
                   font-size: 20px;
                 ">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html" style="
+            <a class="nav-link" href="contact.php" style="
                   color: var(--bs-green);
                   font-weight: bold;
                   font-size: 19px;
