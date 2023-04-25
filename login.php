@@ -33,7 +33,7 @@
                 <form action="" method="">
                     <input class="form-control form-control-lg" type="email" style="width: 300px;height: 52px;margin-top: 10px;margin-bottom: 10px;" placeholder="Email Address" required="">
                     <input class="form-control form-control-lg" type="password" style="width: 300px;height: 52px;margin-top: 10px;margin-bottom: 10px;" placeholder="Password" required="" minlength="6" maxlength="20">
-                    <input class="btn btn-lg btn-primary" type="submit" style="width: 220.5px;height: 53px;margin-top: 10px;margin-bottom: 10px;background: var(--bs-orange);">
+                    <input class="btn btn-lg btn-primary" type="submit" value="Login" style="width: 220.5px;height: 53px;margin-top: 10px;margin-bottom: 10px;background: var(--bs-orange);">
                 </form>
             </div>
             <div class="col-md-6">
