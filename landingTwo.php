@@ -80,28 +80,28 @@ if (!isset($_SESSION['needs'])) {
                 text-align: center;
                 margin-top: 20px;
                 margin-bottom: 10px;
-              " placeholder="First Name" />
+              " placeholder="First Name" required />
           <input class="form-control form-control-lg" name="last_name" type="text" style="
                 width: 300px;
                 height: 53px;
                 text-align: center;
                 margin-top: 10px;
                 margin-bottom: 10px;
-              " placeholder="Last Name" />
+              " placeholder="Last Name" required />
           <input class="form-control form-control-lg" name="email" type="email" style="
                 width: 300px;
                 height: 53px;
                 text-align: center;
                 margin-top: 10px;
                 margin-bottom: 10px;
-              " placeholder="Email Address" />
+              " placeholder="Email Address" required />
           <input class="form-control form-control-lg" name="city" type="text" style="
                 width: 300px;
                 height: 53px;
                 text-align: center;
                 margin-top: 10px;
                 margin-bottom: 10px;
-              " placeholder="City" />
+              " placeholder="City" required />
           <select class="bg-light form-select" name="state" value="state" style="
                 width: 300px;
                 height: 53px;
