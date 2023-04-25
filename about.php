@@ -24,22 +24,25 @@
                   font-weight: bold;
                   color: var(--bs-green);
                   font-size: 20px;
-                ">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php" style="
-                  color: var(--bs-green);
-                  font-weight: bold;
-                  font-size: 20px;
-                ">Login</a>
+                ">Register </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.php" style="
                   color: var(--bs-green);
                   font-weight: bold;
-                  font-size: 19px;
-                ">Contact</a>
+                  font-size: 20px;
+                ">Contact </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="login.php" style="
+                  color: var(--bs-green);
+                  font-weight: bold;
+                  font-size: 20px;
+                ">Login </a>
+          </li>
+
+
         </ul>
       </div>
     </div>
@@ -137,6 +140,9 @@
         </li>
         <li class="list-inline-item">
           <a class="link-secondary" href="register.php">Register</a>
+        </li>
+        <li class="list-inline-item">
+          <a class="link-secondary" href="review.php">Leave Review</a>
         </li>
       </ul>
       <ul class="list-inline">
