@@ -72,7 +72,7 @@ if (isset($_POST['needs'])) {
     </div>
   </div>
 
-  <form action="landingTwo.php" method="POST">
+  <form action="" method="POST">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
