@@ -74,7 +74,7 @@ if (!isset($_SESSION['needs']))
       <div class="col-md-4"></div>
       <div class="col-md-4" style="margin-left: 45px">
 
-        <form action="db-include/submit.php" method="POST">
+        <form action="db-include/registration.php" method="POST">
           <input class="form-control form-control-lg" name="first_name" type="text" style="
                 width: 300px;
                 height: 53px;
@@ -164,7 +164,7 @@ if (!isset($_SESSION['needs']))
               <option value="WY">WY</option>
             </optgroup>
           </select>
-          <input class="form-control form-control-lg" type="password" style="
+          <input class="form-control form-control-lg" name="password" type="password" style="
                 width: 300px;
                 height: 53px;
                 margin-top: 10px;
