@@ -1,5 +1,14 @@
 <!DOCTYPE html>
+
+<?php
+
+require_once('db-include/config.php');
+require_once('db-include/session.php');
+
+?>
+
 <html lang="en">
+
 
 <head>
   <meta charset="utf-8" />

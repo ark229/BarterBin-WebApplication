@@ -3,6 +3,7 @@
 <?php
 
 require_once('db-include/config.php');
+require_once('db-include/session.php');
 
 if ($_POST['needs'] != '' && $_POST['offers'] != '') {
 
