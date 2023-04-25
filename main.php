@@ -95,7 +95,7 @@
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-black);">100% Matches</span>&nbsp;(People who need what you have, &amp; have what you need).</h1>
+                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);">100% Matches</span>&nbsp;(People who need what you have, &amp; have what you need).</h1>
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@
     <div class="container" style="margin-top: 20px;margin-bottom: 10px;">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-black);">50% Matches</span>&nbsp;(People who either have what you need, or want what you're offering).</h1>
+                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);">50% Matches</span>&nbsp;(People who either have what you need, or want what you're offering).</h1>
             </div>
             <div class="col-md-12">
                 <div class="card-group" style="margin-top: 20px;">
