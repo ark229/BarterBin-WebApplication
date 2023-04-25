@@ -77,12 +77,12 @@ if (isset($_POST['needs'])) {
       <div class="row">
         <div class="col-md-4">
           <div class="input-group">
-            <input class="form-control form-control-lg" name="needs" type="text" placeholder="I need this...." style="border-width: 3px" required="" />
+            <input class="form-control form-control-lg" name="needs" type="text" placeholder="I need this...." style="border-width: 3px" />
           </div>
         </div>
         <div class="col-md-4">
           <div class="input-group">
-            <input class="form-control form-control-lg" name="offers" type="text" placeholder="I can offer this..." style="border-width: 3px" required="" />
+            <input class="form-control form-control-lg" name="offers" type="text" placeholder="I can offer this..." style="border-width: 3px" />
           </div>
         </div>
         <div class="col-md-4" style="padding-top: 0px">
