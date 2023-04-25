@@ -105,7 +105,7 @@ if ($result) {
       <div class="col-md-4"></div>
       <div class="col-md-4" style="margin-left: 45px">
 
-        <form action="" method="POST">
+        <form action="landingTwo.php" method="POST">
           <input class="form-control form-control-lg" name="first_name" type="text" style="
                 width: 300px;
                 height: 53px;
