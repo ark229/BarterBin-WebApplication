@@ -163,6 +163,13 @@ if (!isset($_SESSION['needs'])) {
               <option value="WY">WY</option>
             </optgroup>
           </select>
+          <input class="form-control form-control-lg" type="password" style="
+                width: 300px;
+                height: 53px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                text-align: center;
+              " placeholder="Create Password" required="" minlength="6" maxlength="20" />
           <input class="btn btn-lg btn-primary" type="submit" style="
                 width: 300px;
                 height: 55px;
