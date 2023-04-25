@@ -4,10 +4,11 @@
 
 require_once('db-include/config.php');
 
-if (isset($_POST['needs'])) {
+if ($_POST['needs'] != '' && $_POST['offers'] != '') {
 
-  echo 'submitted!';
+  echo 'The fields are complete!';
 }
+
 
 ?>
 
@@ -78,12 +79,12 @@ if (isset($_POST['needs'])) {
       <div class="row">
         <div class="col-md-4">
           <div class="input-group">
-            <input class="form-control form-control-lg" name="needs" type="text" placeholder="I need this...." style="border-width: 3px" />
+            <input class="form-control form-control-lg" name="needs" type="text" placeholder="I need this...." style="border-width: 3px" minlength="3" required="" />
           </div>
         </div>
         <div class="col-md-4">
           <div class="input-group">
-            <input class="form-control form-control-lg" name="offers" type="text" placeholder="I can offer this..." style="border-width: 3px" />
+            <input class="form-control form-control-lg" name="offers" type="text" placeholder="I can offer this..." style="border-width: 3px" minlength="3" required="" />
           </div>
         </div>
         <div class="col-md-4" style="padding-top: 0px">
