@@ -19,8 +19,9 @@ if (isset($_POST['submit'])) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert the data into the "users" table
-    $sql = "INSERT INTO users (first_name, last_name, email, city, state, password, date_added)
+    $query = "INSERT INTO users (first_name, last_name, email, city, state, password, date_added)
             VALUES ('$first_name', '$last_name', '$email', '$city', '$state', '$hashed_password', NOW())";
+    $db->query($query);
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
