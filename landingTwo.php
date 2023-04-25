@@ -28,6 +28,7 @@ if ($stmt->rowCount() > 0) {
 } else {
   // Insert the new user into the database
   $sql = "INSERT INTO users (first_name, last_name, email, city, state, password, date_added) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+  $db->query($query);
   $stmt = $pdo->prepare($sql);
   $result = $stmt->execute([$first_name, $last_name, $email, $city, $state, $hashed_password]);
 
