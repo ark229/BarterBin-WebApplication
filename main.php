@@ -106,25 +106,28 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Their wants:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
                             <h4 class="card-title">Their offers:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Their wants:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
                             <h4 class="card-title">Their offers:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Their wants:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
                             <h4 class="card-title">Their offers:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
                         </div>
                     </div>
                 </div>
@@ -141,25 +144,28 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Their wants:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
                             <h4 class="card-title">Their offers:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Their wants:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
                             <h4 class="card-title">Their offers:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Their wants:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
                             <h4 class="card-title">Their offers:</h4>
-                            <p style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
                         </div>
                     </div>
                 </div>
