@@ -5,6 +5,10 @@
 require_once('db-include/config.php');
 require_once('db-include/session.php');
 
+if (!isset($_SESSION['needs'])) {
+  header("location: /index.php");
+}
+
 ?>
 
 <html lang="en">
