@@ -27,12 +27,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-    if (isset($_SESSION['success_message'])) {
-        echo "<p>" . $_SESSION['Registration is successful! Please Login.'] . "</p>";
-        // Remove the session variable after displaying the message
-        unset($_SESSION['success_message']);
-    }
 }
 
 // Close the connection

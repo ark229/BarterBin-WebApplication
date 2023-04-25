@@ -8,11 +8,7 @@ require_once('db-include/session.php');
 if (!isset($_SESSION['needs']))
   header("location: /index.php");
 
-if (isset($_SESSION['success_message'])) {
-  echo "<p>" . $_SESSION['success_message'] . "</p>";
-  // Remove the session variable after displaying the message
-  unset($_SESSION['success_message']);
-}
+
 
 ?>
 
