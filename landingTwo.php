@@ -8,6 +8,8 @@ require_once('db-include/session.php');
 if (!isset($_SESSION['needs']))
   header("location: /index.php");
 
+$password = $_POST['passwd'];
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 $query = "INSERT INTO user(first_name, last_name, email, city, state_name, passwd) VALUES('$_POST[first_name]', '$_POST[last_name]', '$_POST[email]', '$_POST[city]', '$_POST[state_name]', '$_POST[passwd]', NOW())";
 $db->query($query);
