@@ -6,8 +6,6 @@ require_once('db-include/config.php');
 
 if ($_POST['needs'] != '' && $_POST['offers'] != '') {
 
-  echo 'The fields are complete!';
-
   $_SESSION['needs'] = $_POST['needs'];
   $_SESSION['offers'] = $_POST['offers'];
 
