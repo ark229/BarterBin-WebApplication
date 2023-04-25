@@ -180,7 +180,7 @@
                 margin-bottom: 10px;
                 text-align: center;
               " placeholder="Create Password" required="" minlength="6" maxlength="20" />
-          <input class="btn btn-primary" type="submit" style="
+          <input class="btn btn-primary" type="submit" value="Submit" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
