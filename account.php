@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>BarginBin</title>
+    <title>Barter Bin - Account</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/css/DA_About.css">
@@ -13,11 +13,11 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md py-3" style="box-shadow: 0px 0px var(--bs-warning);">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 352px;margin: 6px;padding: 0px;height: 219.469px;"></span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.php"><span><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 352px;margin: 6px;padding: 0px;height: 219.469px;"></span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
                 <div class="d-md-none my-2"><a class="btn btn-light me-2" role="button" style="font-weight: bold;background: var(--bs-teal);">LOGIN</a></div>
             </div>
-            <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" style="--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;background: #c8ccd0;backdrop-filter: opacity(0.94) brightness(121%) contrast(76%);-webkit-backdrop-filter: opacity(0.94) brightness(121%) contrast(76%);--bs-body-font-size: 9rem;--bs-body-font-weight: bold;border-color: var(--bs-teal);box-shadow: 0px 0px var(--bs-yellow);padding-right: 11px;margin-left: -36px;" href="login.html">LOGIN HERE</a></div>
+            <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" style="--bs-secondary: #6c757d;--bs-secondary-rgb: 108,117,125;background: #c8ccd0;backdrop-filter: opacity(0.94) brightness(121%) contrast(76%);-webkit-backdrop-filter: opacity(0.94) brightness(121%) contrast(76%);--bs-body-font-size: 9rem;--bs-body-font-weight: bold;border-color: var(--bs-teal);box-shadow: 0px 0px var(--bs-yellow);padding-right: 11px;margin-left: -36px;" href="login.php">LOGIN HERE</a></div>
         </div>
     </nav>
     <div class="container">
@@ -30,9 +30,9 @@
     <footer class="text-center" style="padding-top: 119px;">
         <div class="container text-muted py-4 py-lg-5">
             <ul class="list-inline">
-                <li class="list-inline-item me-4"><a class="link-secondary" href="about.html">About</a></li>
-                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.html">Contact</a></li>
-                <li class="list-inline-item"><a class="link-secondary" href="register.html">Register</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="about.php">About</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.php">Contact</a></li>
+                <li class="list-inline-item"><a class="link-secondary" href="register.php">Register</a></li>
             </ul>
             <ul class="list-inline">
                 <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">

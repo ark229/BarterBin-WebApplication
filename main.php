@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>BarginBin</title>
+    <title>Barter Bin - Main</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/css/DA_About.css">
@@ -13,11 +13,11 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md py-3" style="border-bottom: 3px solid var(--bs-gray-500);">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html" style="width: 340px;height: 230px;"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.php" style="width: 340px;height: 230px;"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="editBarter.html" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Edit Barter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="account.html" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Account</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="editBarter.php" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Edit Barter</a></li>
+                    <li class="nav-item"><a class="nav-link" href="account.php" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Account</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-green);font-weight: bold;font-size: 19px;">Logout</a></li>
                 </ul>
             </div>
@@ -26,7 +26,10 @@
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12" style="margin-right: 0px;margin-left: 35px;">
-                <form><input class="form-control form-control-lg" type="text" style="width: 250px;margin-top: 10px;margin-bottom: 10px;text-align: center;" placeholder="City"><select class="bg-light form-select" name="state" value="state" style="width: 250px;height: 48px;font-size: 20px;text-align: center;color: var(--bs-gray);">
+
+                <form action="" method="">
+                    <input class="form-control form-control-lg" name="city" type="text" style="width: 250px;margin-top: 10px;margin-bottom: 10px;text-align: center;" placeholder="City">
+                    <select class="bg-light form-select" name="state" value="state" style="width: 250px;height: 48px;font-size: 20px;text-align: center;color: var(--bs-gray);">
                         <optgroup label="State">
                             <option value="AK">AK</option>
                             <option value="AL">AL</option>
@@ -81,8 +84,11 @@
                             <option value="WY">WY</option>
                         </optgroup>
                     </select>
-                    <div class="form-check" style="width: 250px;margin-top: 10px;margin-left: 10px;text-align: left;"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="font-size: 18px;">Ignore Location</label></div><button class="btn btn-primary btn-lg" type="button" style="width: 250px;background: var(--bs-green);margin-top: 10px;margin-left: 0px;margin-bottom: 10px;">Update Results</button>
+                    <div class="form-check" style="width: 250px;margin-top: 10px;margin-left: 10px;text-align: left;">
+                        <input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="font-size: 18px;">Ignore Location</label>
+                    </div><button class="btn btn-primary btn-lg" type="button" style="width: 250px;background: var(--bs-green);margin-top: 10px;margin-left: 0px;margin-bottom: 10px;">Update Results</button>
                 </form>
+
             </div>
         </div>
     </div>
@@ -163,9 +169,9 @@
     <footer class="text-center" style="padding-top: 119px;">
         <div class="container text-muted py-4 py-lg-5">
             <ul class="list-inline">
-                <li class="list-inline-item me-4"><a class="link-secondary" href="about.html">About</a></li>
-                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.html">Contact</a></li>
-                <li class="list-inline-item"><a class="link-secondary" href="register.html">Register</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="about.php">About</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.php">Contact</a></li>
+                <li class="list-inline-item"><a class="link-secondary" href="register.php">Register</a></li>
             </ul>
             <ul class="list-inline">
                 <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">

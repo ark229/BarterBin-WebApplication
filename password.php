@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>BarginBin</title>
+    <title>Barter Bin - Reset Password</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/css/DA_About.css">
@@ -13,12 +13,12 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md py-3" style="border-bottom: 3px solid var(--bs-gray-500);margin-bottom: 60px;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html" style="width: 340px;height: 230px;"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.php" style="width: 340px;height: 230px;"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="register.html" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html" style="color: var(--bs-green);font-weight: bold;font-size: 19px;">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="register.php" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.php" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php" style="color: var(--bs-green);font-weight: bold;font-size: 19px;">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -41,9 +41,9 @@
         <hr style="height: 2px;color: #214a80;background-color: #172f76;">
         <div class="container text-muted py-4 py-lg-5">
             <ul class="list-inline">
-                <li class="list-inline-item me-4"><a class="link-secondary" href="about.html">About</a></li>
-                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.html">Contact</a></li>
-                <li class="list-inline-item"><a class="link-secondary" href="register.html">Register</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="about.php">About</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.php">Contact</a></li>
+                <li class="list-inline-item"><a class="link-secondary" href="register.php">Register</a></li>
             </ul>
             <ul class="list-inline">
                 <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
