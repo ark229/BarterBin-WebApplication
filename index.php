@@ -1,3 +1,14 @@
+<?php
+
+require_once('db-include/config.php');
+
+if (isset($_POST['needs'])) {
+
+  echo 'submitted!';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
