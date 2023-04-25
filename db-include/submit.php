@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 }
 
 // Close the connection
-$conn->close();
+//$conn->close();
 ?>
 
 <html lang="en">
