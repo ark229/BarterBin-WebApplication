@@ -81,49 +81,49 @@ require_once('db-include/session.php');
       <div class="col-md-4" style="margin-left: 0px; margin-top: 20px">
 
         <form action="db-include/submit.php" method="POST" style="margin-left: 51px; margin-right: 0px; margin-bottom: 0px">
-          <input class="form-control form-control-lg" type="text" style="
+          <input class="form-control form-control-lg" name="needs" type="text" style="
                 width: 300px;
                 height: 60px;
                 margin-bottom: 10px;
                 margin-top: 10px;
                 text-align: center;
               " placeholder="I need this..." />
-          <input class="form-control form-control-lg" type="text" style="
+          <input class="form-control form-control-lg" name="offers" type="text" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 text-align: center;
               " placeholder="I can offer this..." />
-          <input class="form-control form-control-lg" type="text" style="
+          <input class="form-control form-control-lg" name="first_name" type="text" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 text-align: center;
               " placeholder="First Name" required="" />
-          <input class="form-control form-control-lg" type="text" style="
+          <input class="form-control form-control-lg" name="last_name" type="text" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 text-align: center;
               " placeholder="Last Name" required="" />
-          <input class="form-control form-control-lg" type="email" style="
+          <input class="form-control form-control-lg" name="email" type="email" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 text-align: center;
               " placeholder="Email Address" required="" />
-          <input class="form-control form-control-lg" type="text" style="
+          <input class="form-control form-control-lg" name="city" type="text" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 text-align: center;
               " placeholder="City" required="" autocomplete="on" />
-          <select class="bg-light form-select" name="state" value="state" style="
+          <select class="bg-light form-select" name="state_name" value="state" style="
                 width: 300px;
                 height: 60px;
                 font-size: 20px;
@@ -184,7 +184,7 @@ require_once('db-include/session.php');
               <option value="WY">WY</option>
             </optgroup>
           </select>
-          <input class="form-control form-control-lg" type="password" style="
+          <input class="form-control form-control-lg" name="passwd" type="password" style="
                 width: 300px;
                 height: 60px;
                 margin-top: 10px;
