@@ -29,7 +29,7 @@ if ($stmt->rowCount() > 0) {
     $result = $stmt->execute([$first_name, $last_name, $email, $city, $state, $hashed_password]);
 
     if ($result) {
-        echo "Registration successful. Please <a href='login.php'>Login</a>.";
+        header("Location: /../login.php");
     } else {
         echo "Registration failed. Please try again.";
     }
