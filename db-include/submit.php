@@ -19,14 +19,13 @@ $sql = "INSERT INTO users (first_name, last_name, email, city, state_name, passw
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssss", $first_name, $last_name, $email, $city, $state_name, $hashed_password);
-header("Location: /login.php"); // Redirect to the login page after successful registration
+//header("Location: /login.php"); // Redirect to the login page after successful registration
 
-
-//if ($stmt->execute()) {
-// header("Location: /login.php"); // Redirect to the login page after successful registration
-//} else {
-//echo "Error: " . $sql . "<br>" . $conn->error;
-//}
+if ($stmt->execute()) {
+    header("Location: /login.php"); // Redirect to the login page after successful registration
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 $stmt->close();
 $conn->close();

@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+
+<?php
+
+require_once('db-include/config.php');
+require_once('db-include/session.php');
+
+
+
+?>
+
 <html lang="en">
 
 <head>
@@ -69,7 +79,8 @@
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4" style="margin-left: 0px; margin-top: 20px">
-        <form action="" method="POST" style="margin-left: 51px; margin-right: 0px; margin-bottom: 0px">
+
+        <form action="db-include/submit.php" method="POST" style="margin-left: 51px; margin-right: 0px; margin-bottom: 0px">
           <input class="form-control form-control-lg" type="text" style="
                 width: 300px;
                 height: 60px;
