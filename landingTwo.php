@@ -8,12 +8,13 @@ require_once('db-include/session.php');
 if (!isset($_SESSION['needs']))
   header("location: /index.php");
 
-?>
-
-//$query = "INSERT INTO user(first_name, last_name, email, city, state_name, passwd) VALUES('$_POST[first_name]', '$_POST[last_name]', '$_POST[email]', '$_POST[city]', '$_POST[state_name]', '$_POST[passwd]', NOW())";
+// $query = "INSERT INTO user(first_name, last_name, email, city, state_name, passwd) VALUES('$_POST[first_name]', '$_POST[last_name]', '$_POST[email]', '$_POST[city]', '$_POST[state_name]', '$_POST[passwd]', NOW())";
 //$db->query($query);
 
 ?>
+
+
+
 
 <html lang="en">
 
