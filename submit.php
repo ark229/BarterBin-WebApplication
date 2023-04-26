@@ -5,12 +5,15 @@ require_once('config.php');
 
 $password_hash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO user (first_name, last_name, email, city, state_name, password_hash, date_added)
+$sql = "INSERT INTO users (first_name, last_name, email, city, state_name, password_hash, date_added)
         VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
-$stmt = $conn->stmt_init();
+//$stmt = $conn->stmt_init();
+$stmt = mysqli_stmt_init($conn);
+mysqli_stmt_prepare($stmt, $sql);
 
-$stmt->bind_param(
+mysqli_stmt_bind_param(
+    $stmt,
     "ssssss",
     $_POST["first_name"],
     $_POST["last_name"],
@@ -19,7 +22,7 @@ $stmt->bind_param(
     $_POST["state_name"],
     $password_hash
 );
-
+mysqli_stmt_execute($stmt);
 header("Location: success.php");
 
 /*
