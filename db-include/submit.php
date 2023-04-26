@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-
+/*
 require_once('config.php');
 require_once('session.php');
 
@@ -30,5 +30,42 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 
+*/
+
+$password_hash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
+
+$mysqli = require __DIR__ . "/config.php";
+
+$sql = "INSERT INTO user (first_name, last_name, email, city, state_name, password_hash, date_added)
+        VALUES (?, ?, ?, ?, ?, ?, NOW())";
+
+$stmt = $mysqli->stmt_init();
+
+if (!$stmt->prepare($sql)) {
+    die("SQL error: " . $mysqli->error);
+}
+
+$stmt->bind_param(
+    "sss",
+    $_POST["first_name"],
+    $_POST["last_name"],
+    $_POST["email"],
+    $_POST["city"],
+    $_POST["state_name"],
+    $password_hash
+);
+
+if ($stmt->execute()) {
+
+    header("Location: success.php");
+    exit;
+} else {
+
+    if ($mysqli->errno === 1062) {
+        die("email already taken");
+    } else {
+        die($mysqli->error . " " . $mysqli->errno);
+    }
+}
 
 ?>
