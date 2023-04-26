@@ -20,7 +20,7 @@ mysqli_stmt_bind_param(
     $_POST["email"],
     $_POST["city"],
     $_POST["state_name"],
-    $$_POST["passwd"]
+    $_POST["passwd"]
 );
 mysqli_stmt_execute($stmt);
 header("Location: success.php");
