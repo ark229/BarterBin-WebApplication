@@ -8,7 +8,7 @@ $password_hash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
 $sql = "INSERT INTO user (first_name, last_name, email, city, state_name, password_hash, date_added)
         VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
-$stmt = $mysqli->stmt_init();
+$stmt = $conn->stmt_init();
 
 $stmt->bind_param(
     "ssssss",
