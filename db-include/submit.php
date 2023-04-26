@@ -3,41 +3,32 @@
 <?php
 
 require_once('db-include/config.php');
-require_once('db-include/session.php');
+//require_once('db-include/session.php');
 
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
 $city = $_POST['city'];
-$state = $_POST['state_name'];
-$password = $_POST['passwd'];
+$state_name = $_POST['state_name'];
+$passwd = $_POST['passwd'];
 
 // Hash the password for security
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$hashed_password = password_hash($passwd, PASSWORD_DEFAULT);
 
-// Check if the user already exists
-$sql = "SELECT * FROM users WHERE email = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$email]);
+$sql = "INSERT INTO users (first_name, last_name, email, city, state_name, passwd, date_added) VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
-if ($stmt->rowCount() > 0) {
-    echo "User already exists with this email.";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssssss", $first_name, $last_name, $email, $city, $state_name, $hashed_password);
+
+if ($stmt->execute()) {
+    header("Location: /login.php"); // Redirect to the login page after successful registration
 } else {
-    // Insert the new user into the database
-    $sql = "INSERT INTO users (first_name, last_name, email, city, state_name, passwd, date_added) VALUES (?, ?, ?, ?, ?, ?, NOW())";
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([$first_name, $last_name, $email, $city, $state, $hashed_password]);
-
-    if ($result) {
-        header("Location: /../login.php");
-    } else {
-        echo "Registration failed. Please try again.";
-    }
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-//mysqli_commit($conn);
-//Close the connection
+$stmt->close();
 $conn->close();
+
 
 ?>
 
