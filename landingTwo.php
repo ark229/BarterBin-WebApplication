@@ -2,8 +2,8 @@
 
 <?php
 
-require_once('db-include/config.php');
-require_once('db-include/session.php');
+require_once('config.php');
+require_once('session.php');
 
 if (!isset($_SESSION['needs']))
   header("location: /index.php");
@@ -78,7 +78,7 @@ if (!isset($_SESSION['needs']))
       <div class="col-md-4"></div>
       <div class="col-md-4" style="margin-left: 45px">
 
-        <form action="db-include/submit.php" method="POST">
+        <form action="submit.php" method="POST">
           <input class="form-control form-control-lg" name="first_name" type="text" style="
                 width: 300px;
                 height: 53px;

@@ -2,8 +2,8 @@
 
 <?php
 
-require_once('db-include/config.php');
-require_once('db-include/session.php');
+require_once('config.php');
+require_once('session.php');
 
 if ($_POST['needs'] != '' && $_POST['offers'] != '') {
 
