@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 
 <?php
 
@@ -33,4 +33,3 @@ $conn->close();
 
 
 ?>
-
