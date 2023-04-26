@@ -4,6 +4,7 @@ $username = 'b3588185a24fe4';
 $password = 'ebdf00d5';
 $dbname = 'heroku_24d833d07b8f60f';
 
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $connection = new mysqli($host, $username, $password, $dbname);
 
 if ($connection->connect_error) {
