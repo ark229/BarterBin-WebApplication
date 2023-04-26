@@ -15,7 +15,7 @@ mysqli_stmt_bind_param(
     $_POST["email"],
     $_POST["city"],
     $_POST["state_name"],
-    $_POST["passwd"]
+    password_hash($_POST["passwd"], PASSWORD_DEFAULT)
 );
 
 mysqli_stmt_execute($stmt);
