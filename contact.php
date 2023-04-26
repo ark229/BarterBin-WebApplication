@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+
+<?php
+
+require_once('config.php');
+require_once('session.php');
+
+?>
+
 <html lang="en">
 
 <head>
@@ -26,14 +34,14 @@
                 <div class="col"><iframe allowfullscreen="" frameborder="0" loading="lazy" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCrJ0IP9dw0pM9MXgi7qX5g_tBUqAGIJEU&amp;q=500+E+Main+St%2C+Norfolk+VA+23510&amp;zoom=11&amp;maptype=satellite" width="100%" height="100%"></iframe></div>
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form class="p-3 p-xl-4" method="post" action="">
+                        <form class="p-3 p-xl-4" method="post" action="contact-process.php">
                             <h4 style="color: var(--bs-orange);font-size: 30px;font-weight: bold;">Contact us</h4>
                             <p class="text-muted">If you have any questions, concerns, or problems registering or
                                 logging into your account please feel free to contact us. We will get back to you
                                 within 48 hours.</p>
-                            <div class="mb-3"><label class="form-label" for="name">Name</label><input class="form-control" type="text" id="name" name="name"></div>
+                            <div class="mb-3"><label class="form-label" for="fullname">Name</label><input class="form-control" type="text" id="fullname" name="fullname"></div>
                             <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control" type="email" id="email" name="email"></div>
-                            <div class="mb-3"><label class="form-label" for="message">Message</label><textarea class="form-control" id="message" name="message" rows="6"></textarea></div>
+                            <div class="mb-3"><label class="form-label" for="messages">Message</label><textarea class="form-control" id="messages" name="messages" rows="6"></textarea></div>
                             <div class="mb-3"><button class="btn btn-primary" type="submit">Send </button></div>
                         </form>
                     </div>
