@@ -1,8 +1,29 @@
-<!DOCTYPE html>
+
 
 <?php
-/*
 require_once('config.php');
+
+$password_hash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO user (first_name, last_name, email, city, state_name, password_hash, date_added)
+        VALUES (?, ?, ?, ?, ?, ?, NOW())";
+
+$stmt = $mysqli->stmt_init();
+
+$stmt->bind_param(
+    "ssssss",
+    $_POST["first_name"],
+    $_POST["last_name"],
+    $_POST["email"],
+    $_POST["city"],
+    $_POST["state_name"],
+    $password_hash
+);
+
+header("Location: success.php");
+
+/*
+
 require_once('session.php');
 
 $first_name = $_POST['first_name'];
@@ -32,29 +53,12 @@ $conn->close();
 
 */
 
-$password_hash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
+//if (!$stmt->prepare($sql)) {
+//die("SQL error: " . $mysqli->error);
+//}
 
-$mysqli = require __DIR__ . "/config.php";
 
-$sql = "INSERT INTO user (first_name, last_name, email, city, state_name, password_hash, date_added)
-        VALUES (?, ?, ?, ?, ?, ?, NOW())";
-
-$stmt = $mysqli->stmt_init();
-
-if (!$stmt->prepare($sql)) {
-    die("SQL error: " . $mysqli->error);
-}
-
-$stmt->bind_param(
-    "sss",
-    $_POST["first_name"],
-    $_POST["last_name"],
-    $_POST["email"],
-    $_POST["city"],
-    $_POST["state_name"],
-    $password_hash
-);
-
+/*
 if ($stmt->execute()) {
 
     header("Location: success.php");
@@ -67,5 +71,7 @@ if ($stmt->execute()) {
         die($mysqli->error . " " . $mysqli->errno);
     }
 }
+
+*/
 
 ?>
