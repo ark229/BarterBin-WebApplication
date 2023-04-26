@@ -15,7 +15,9 @@ mysqli_stmt_prepare($stmt, $sql);
 
 mysqli_stmt_bind_param(
     $stmt,
-    "ssssss",
+    "ssssssss",
+    $_POST["needs"],
+    $_POST["offers"],
     $_POST["first_name"],
     $_POST["last_name"],
     $_POST["email"],
@@ -24,12 +26,6 @@ mysqli_stmt_bind_param(
     $_POST["passwd"]
 );
 
-mysqli_stmt_bind_param(
-    $stmt,
-    "ss",
-    $_POST["needs"],
-    $_POST["offers"],
-);
 
 mysqli_stmt_execute($stmt);
 header("Location: success.php");
