@@ -3,7 +3,7 @@
 <?php
 
 require_once('config.php');
-//require_once('db-include/session.php');
+require_once('session.php');
 
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
