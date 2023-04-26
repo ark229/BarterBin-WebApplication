@@ -10,7 +10,8 @@ $sql2 = "INSERT INTO items (needs, offers, date_added) VALUES (?, ?, NOW())";
 
 //$stmt = $conn->stmt_init();
 $stmt = mysqli_stmt_init($conn);
-mysqli_stmt_prepare($stmt, $sql, $sql2);
+mysqli_stmt_prepare($stmt, $sql);
+mysqli_stmt_prepare($stmt, $sql2);
 
 mysqli_stmt_bind_param(
     $stmt,
