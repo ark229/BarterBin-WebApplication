@@ -16,7 +16,7 @@ $result = mysqli_stmt_get_result($stmt);
 if ($row = mysqli_fetch_assoc($result)) {
     // Verify the entered password against the stored hashed password
     if (password_verify($password, $row['passwd'])) {
-        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['email'] = $row['email'];
         header("Location: main.php");
     } else {
