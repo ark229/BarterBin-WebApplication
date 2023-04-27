@@ -26,10 +26,10 @@ $user_id = mysqli_insert_id($conn); // Get the ID of the newly created user
 $needs = explode(",", $_POST["needs"]);
 foreach ($needs as $need) {
     $need = trim($need); // Remove any extra spaces
-    $sql = "INSERT INTO needs (user_id, needs, date_added) VALUES (?, ?, NOW())";
+    $sql = "INSERT INTO needs (user_id, need, date_added) VALUES (?, ?, NOW())";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "is", $user_id, $needs);
+    mysqli_stmt_bind_param($stmt, "is", $user_id, $need);
     mysqli_stmt_execute($stmt);
 }
 
@@ -37,10 +37,10 @@ foreach ($needs as $need) {
 $offers = explode(",", $_POST["offers"]);
 foreach ($offers as $offer) {
     $offer = trim($offer); // Remove any extra spaces
-    $sql = "INSERT INTO offers (user_id, offers, date_added) VALUES (?, ?, NOW())";
+    $sql = "INSERT INTO offers (user_id, offer, date_added) VALUES (?, ?, NOW())";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "is", $user_id, $offers);
+    mysqli_stmt_bind_param($stmt, "is", $user_id, $offer);
     mysqli_stmt_execute($stmt);
 }
 
