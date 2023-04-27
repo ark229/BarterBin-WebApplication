@@ -1,3 +1,12 @@
+<?php
+
+require_once('config.php');
+require_once('session.php');
+require_once('nav-main.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +21,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md py-3" style="border-bottom: 3px solid var(--bs-gray-500);">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.php" style="width: 340px;height: 230px;"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-2">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="editBarter.php" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Edit Barter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="account.php" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Account</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-green);font-weight: bold;font-size: 19px;">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- NAV BAR -->
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12" style="margin-right: 0px;margin-left: 35px;">
