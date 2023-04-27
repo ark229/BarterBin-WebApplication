@@ -1,8 +1,8 @@
 <?php
 require_once('config.php');
 
-// Hash the user's password
-$password_hash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
+
+$password_plain = $_POST["passwd"];
 
 // Insert user data into the users table
 $sql = "INSERT INTO users (first_name, last_name, email, city, state_name, passwd, date_added)
@@ -19,7 +19,7 @@ mysqli_stmt_bind_param(
     $_POST["email"],
     $_POST["city"],
     $_POST["state_name"],
-    $password_hash
+    $password_plain
 );
 
 mysqli_stmt_execute($stmt);

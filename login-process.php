@@ -14,16 +14,13 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    // Verify the entered password against the stored hashed password
-    if (password_verify($password, $row['passwd'])) {
+    // Compare the entered password with the stored plain password
+    if ($password === $row['passwd']) {
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['email'] = $row['email'];
         header("Location: main.php");
     } else {
-        // Debugging information
-        echo "Submitted password: " . $password . "<br>";
-        echo "Stored hashed password: " . $row['passwd'] . "<br>";
-        exit("Wrong password.");
+        header("Location: login.php?error=wrongpassword");
     }
 } else {
     header("Location: login.php?error=nouser");
