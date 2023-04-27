@@ -20,10 +20,10 @@ if ($row = mysqli_fetch_assoc($result)) {
         $_SESSION['email'] = $row['email'];
         header("Location: main.php");
     } else {
-        header("Location: login.html?error=wrongpassword");
+        header("Location: login.php?error=wrongpassword");
     }
 } else {
-    header("Location: login.html?error=nouser");
+    header("Location: login.php?error=nouser");
 }
 
 mysqli_close($conn);
