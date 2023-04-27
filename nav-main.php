@@ -3,6 +3,10 @@
 require_once('config.php');
 require_once('session.php');
 
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+
 ?>
 
 <!DOCTYPE html>
