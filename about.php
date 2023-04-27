@@ -26,8 +26,8 @@ require_once('nav2.php');
       <span class="blc" style="color: #343a40;">Barter For | </span>
       <span class="cd-words-wrapper">
         <b class="is-visible" style="color: #20c997;">You.</b>
-        <b>Us.</b>
-        <b>Everyone.</b>
+        <b style="color: #0dcaf0;">Us.</b>
+        <b style="color: #ffc107;">Everyone.</b>
       </span>
     </h1>
   </div>
