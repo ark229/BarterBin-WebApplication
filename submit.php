@@ -1,6 +1,7 @@
 <?php
 require_once('config.php');
 
+// Insert user data into the users table
 $sql = "INSERT INTO users (first_name, last_name, email, city, state_name, passwd, date_added)
         VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
@@ -15,29 +16,32 @@ mysqli_stmt_bind_param(
     $_POST["email"],
     $_POST["city"],
     $_POST["state_name"],
-    password_hash($_POST["passwd"], PASSWORD_DEFAULT)
+    $_POST["passwd"]
 );
 
 mysqli_stmt_execute($stmt);
+$user_id = mysqli_insert_id($conn); // Get the ID of the newly created user
 
-// Get the user_id of the newly inserted user
-$user_id = mysqli_insert_id($conn);
+// Insert needs into the needs table
+$needs = explode(",", $_POST["needs"]);
+foreach ($needs as $need) {
+    $need = trim($need); // Remove any extra spaces
+    $sql = "INSERT INTO needs (user_id, needs, date_added) VALUES (?, ?, NOW())";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "is", $user_id, $needs);
+    mysqli_stmt_execute($stmt);
+}
 
-// Insert needs and offers data into the "items" table
-$sql2 = "INSERT INTO items (user_id, needs, offers, date_added)
-         VALUES (?, ?, ?, NOW())";
-
-$stmt2 = mysqli_stmt_init($conn);
-mysqli_stmt_prepare($stmt2, $sql2);
-
-mysqli_stmt_bind_param(
-    $stmt2,
-    "iss",
-    $user_id,
-    $_POST["needs"],
-    $_POST["offers"]
-);
-
-mysqli_stmt_execute($stmt2);
+// Insert offers into the offers table
+$offers = explode(",", $_POST["offers"]);
+foreach ($offers as $offer) {
+    $offer = trim($offer); // Remove any extra spaces
+    $sql = "INSERT INTO offers (user_id, offers, date_added) VALUES (?, ?, NOW())";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "is", $user_id, $offers);
+    mysqli_stmt_execute($stmt);
+}
 
 header("Location: success.php");
