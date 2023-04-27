@@ -23,9 +23,9 @@ require_once('nav2.php');
 
   <div class="caption v-middle text-center">
     <h1 class="cd-headline clip">
-      <span class="blc">Barter For | </span>
+      <span class="blc" style="color: #343a40;">Barter For | </span>
       <span class="cd-words-wrapper">
-        <b class="is-visible">You.</b>
+        <b class="is-visible" style="color: #20c997;">You.</b>
         <b>Us.</b>
         <b>Everyone.</b>
       </span>
