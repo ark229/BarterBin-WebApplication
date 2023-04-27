@@ -30,7 +30,8 @@
     <div class="container" style="width: 1160px;">
         <div class="row">
             <div class="col-md-6">
-                <form action="" method="">
+
+                <form action="login-process.php" method="post">
                     <input class="form-control form-control-lg" type="email" style="width: 300px;height: 52px;margin-top: 10px;margin-bottom: 10px;" placeholder="Email Address" required="">
                     <input class="form-control form-control-lg" type="password" style="width: 300px;height: 52px;margin-top: 10px;margin-bottom: 10px;" placeholder="Password" required="" minlength="6" maxlength="20">
                     <input class="btn btn-lg btn-primary" type="submit" value="LOGIN" style="width: 220.5px;height: 53px;margin-top: 10px;margin-bottom: 10px;background: var(--bs-orange);">
