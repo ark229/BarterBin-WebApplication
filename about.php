@@ -1,3 +1,11 @@
+<?php
+
+require_once('config.php');
+require_once('session.php');
+require_once('nav2.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" style="height: 1398px">
 
@@ -12,41 +20,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-light navbar-expand-md py-3" style="border-bottom: 3px solid var(--bs-gray-500); margin-bottom: 60px">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.php" style="width: 340px; height: 230px"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px" /></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
-        <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navcol-2">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="register.php" style="
-                  font-weight: bold;
-                  color: var(--bs-green);
-                  font-size: 20px;
-                ">Register </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.php" style="
-                  color: var(--bs-green);
-                  font-weight: bold;
-                  font-size: 20px;
-                ">Contact </a>
-          </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="login.php" style="
-                  color: var(--bs-green);
-                  font-weight: bold;
-                  font-size: 20px;
-                ">Login </a>
-          </li>
-
-
-        </ul>
-      </div>
-    </div>
-  </nav>
   <div class="caption v-middle text-center">
     <h1 class="cd-headline clip">
       <span class="blc">Barter For | </span>
