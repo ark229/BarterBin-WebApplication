@@ -292,7 +292,7 @@ $match_percentage = count($matches_100) / $total_users * 100;
     <div class="container" style="margin-bottom: 25px;">
         <div class="row">
             <?php
-            $all_matches = array_merge($matches_100, $matches_50);
+            $all_matches = array_merge($matches_100, $filtered_matches_50);
             foreach ($all_matches as $match) : ?>
                 <div class="col-md-6" style="margin-bottom: 20px;">
                     <div class="card">
