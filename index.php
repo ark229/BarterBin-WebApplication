@@ -4,14 +4,6 @@ require_once('config.php');
 require_once('session.php');
 require_once('nav.php');
 
-if ($_POST['needs'] != '' && $_POST['offers'] != '') {
-
-  $_SESSION['needs'] = $_POST['needs'];
-  $_SESSION['offers'] = $_POST['offers'];
-
-  header("Location: landingTwo.php");
-}
-
 
 ?>
 

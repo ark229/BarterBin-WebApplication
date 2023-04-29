@@ -37,17 +37,7 @@ $user_needs_offers = $result->fetch_assoc();
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
 
-// Debugging output
-echo "Current user ID: " . $current_user_id . "<br>";
-echo "City: " . $city . "<br>";
-echo "State: " . $state . "<br>";
-echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
 
-echo '100% Matches count: ' . count($matches_100) . '<br>';
-echo '50% Matches count: ' . count($matches_50) . '<br>';
-
-echo "100% Matches user IDs: " . implode(", ", array_column($matches_100, 'user_id')) . "<br>";
-echo "50% Matches user IDs: " . implode(", ", array_column($matches_50, 'user_id')) . "<br>";
 
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
@@ -58,12 +48,6 @@ $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matc
     }
     return true;
 });
-
-// Debugging filtered matches
-echo "Filtered 50% Matches user IDs: " . implode(', ', array_map(function ($match) {
-    return $match['user_id'];
-}, $filtered_matches_50)) . ",<br>";
-
 
 
 // Function to find matches
@@ -102,17 +86,9 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $result = $stmt->get_result();
     $matches = [];
 
-    // Add debugging statements here
-    echo "SQL query: " . $sql . "<br>";
-
 
 
     while ($row = $result->fetch_assoc()) {
-
-        // Add debugging statements here
-        echo "Other user ID: " . $row['user_id'] . "<br>";
-        echo "Other user needs match count: " . $row['needs_match'] . "<br>";
-        echo "Other user offers match count: " . $row['offers_match'] . "<br>";
 
 
         $matched_user_id = $row['user_id'];
