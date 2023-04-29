@@ -165,8 +165,12 @@ $total_users = getTotalUsers($conn, $current_user_id);
 // Merge the two matches arrays
 $all_matches = array_merge($matches_100, $matches_50);
 
+// Remove duplicates from the $all_matches array
+$all_matches = array_map("unserialize", array_unique(array_map("serialize", $all_matches)));
+
 // Calculate match percentage
 $match_percentage = count($matches_100) / $total_users * 100;
+
 
 ?>
 
