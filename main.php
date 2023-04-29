@@ -19,6 +19,15 @@ $city = $user_location['city'];
 $state = $user_location['state_name'];
 $ignore_location = false;
 
+// block of code to handle form data and update the city, state, and ignore_location variables
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $ignore_location = isset($_POST['ignore_location']) ? true : false;
+    if (!$ignore_location) {
+        $city = $_POST['city'];
+        $state = $_POST['state_name'];
+    }
+}
+
 
 // Fetch the user's needs and offers
 $sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
