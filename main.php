@@ -59,13 +59,14 @@ echo '50% Matches count: ' . count($matches_50) . '<br>';
 
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
-    foreach ($matches_100 as $match_100) {
+    foreach ($matches_100 as $match_100) { // <-- Fix here, use $matches_100 instead of $filtered_matches_50
         if ($match_50['user_id'] === $match_100['user_id']) {
             return false;
         }
     }
     return true;
 });
+
 
 //debugging filtered matches
 echo "Filtered 50% Matches user IDs: " . implode(', ', array_map(function ($match) {
