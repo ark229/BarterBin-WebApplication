@@ -50,8 +50,9 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $match_condition = $full_match ? "HAVING COUNT(needs_match) = COUNT(offers_match)" : "HAVING COUNT(needs_match) > 0 OR COUNT(offers_match) > 0";
 
     $sql = "SELECT users.user_id, users.city, users.state_name,
-                   GROUP_CONCAT(DISTINCT my_needs.needs) AS needs_match,
-                   GROUP_CONCAT(DISTINCT my_offers.offers) AS offers_match
+                   COUNT(DISTINCT my_needs.needs) AS needs_match,
+                   COUNT(DISTINCT my_offers.offers) AS offers_match,
+                   GREATEST(MAX(my_needs.date_added), MAX(my_offers.date_added)) as date_added
             FROM users
             INNER JOIN needs ON users.user_id = needs.user_id
             INNER JOIN offers ON users.user_id = offers.user_id
@@ -60,6 +61,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
             WHERE users.user_id != ? $location_condition
             GROUP BY users.user_id
             $match_condition";
+
 
     // Add debugging statements here
     echo "Query: $sql<br>";
