@@ -12,6 +12,15 @@ $city = $_POST['city'] ?? '';
 $state = $_POST['state_name'] ?? '';
 $ignore_location = isset($_POST['ignore_location']) ? true : false;
 
+// Add the debugging statements here
+if ($ignore_location) {
+    echo "Ignore location is checked<br>";
+} else {
+    echo "Ignore location is not checked<br>";
+}
+echo "City: $city<br>";
+echo "State: $state<br>";
+
 // Fetch the user's needs and offers
 $sql = "SELECT needs, offers FROM users
         INNER JOIN needs ON users.user_id = needs.user_id
