@@ -4,6 +4,62 @@ require_once('config.php');
 require_once('session.php');
 require_once('nav-main.php');
 
+// Get the current user ID (you should replace this with the ID of the logged-in user)
+$current_user_id = $_SESSION['user_id'];
+
+// Process the form data
+$city = $_POST['city'] ?? '';
+$state = $_POST['state_name'] ?? '';
+$ignore_location = isset($_POST['ignore_location']) ? true : false;
+
+// Fetch the user's needs and offers
+$sql = "SELECT needs, offers FROM users
+        INNER JOIN needs ON users.user_id = needs.user_id
+        INNER JOIN offers ON users.user_id = offers.user_id
+        WHERE users.user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $current_user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_needs_offers = $result->fetch_assoc();
+
+// Find 100% and 50% matches
+$matches_100 = findMatches($conn, $current_user_id, $user_needs_offers['needs'], $user_needs_offers['offers'], $city, $state, $ignore_location, true);
+$matches_50 = findMatches($conn, $current_user_id, $user_needs_offers['needs'], $user_needs_offers['offers'], $city, $state, $ignore_location, false);
+
+// Function to find matches
+function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $ignore_location, $full_match)
+{
+    $location_condition = $ignore_location ? '' : "AND users.city = ? AND users.state_name = ?";
+    $match_condition = $full_match ? "HAVING needs_match AND offers_match" : "HAVING needs_match OR offers_match";
+
+    $sql = "SELECT users.user_id, users.city, users.state_name, needs.needs, offers.offers,
+                   (needs.needs REGEXP ?) AS needs_match,
+                   (offers.offers REGEXP ?) AS offers_match
+            FROM users
+            INNER JOIN needs ON users.user_id = needs.user_id
+            INNER JOIN offers ON users.user_id = offers.user_id
+            WHERE users.user_id != ? $location_condition
+            $match_condition";
+
+    $stmt = $conn->prepare($sql);
+
+    if ($ignore_location) {
+        $stmt->bind_param("ssii", $offers, $needs, $current_user_id);
+    } else {
+        $stmt->bind_param("ssiiss", $offers, $needs, $current_user_id, $city, $state);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $matches = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $matches[] = $row;
+    }
+
+    return $matches;
+}
 ?>
 
 
@@ -26,7 +82,9 @@ require_once('nav-main.php');
         <div class="row">
             <div class="col-md-12" style="margin-right: 0px;margin-left: 35px;">
 
-                <form action="" method="">
+                <!-- SEARCH FORM -->
+
+                <form action="main.php" method="post">
                     <input class="form-control form-control-lg" name="city" type="text" style="width: 250px;margin-top: 10px;margin-bottom: 10px;text-align: center;" placeholder="City">
                     <select class="bg-light form-select" name="state" value="state" style="width: 250px;height: 48px;font-size: 20px;text-align: center;color: var(--bs-gray);">
                         <optgroup label="State">
@@ -84,17 +142,19 @@ require_once('nav-main.php');
                         </optgroup>
                     </select>
                     <div class="form-check" style="width: 250px;margin-top: 10px;margin-left: 10px;text-align: left;">
-                        <input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="font-size: 18px;">Ignore Location</label>
-                    </div><button class="btn btn-primary btn-lg" type="button" style="width: 250px;background: var(--bs-green);margin-top: 10px;margin-left: 0px;margin-bottom: 10px;">Update Results</button>
+                        <input class="form-check-input" type="checkbox" id="formCheck-1" name="ignore_location"><label class="form-check-label" for="formCheck-1" style="font-size: 18px;">Ignore Location</label>
+                    </div><button class="btn btn-primary btn-lg" type="submit" style="width: 250px;background: var(--bs-green);margin-top: 10px;margin-left: 0px;margin-bottom: 10px;">Update Results</button>
                 </form>
 
             </div>
         </div>
     </div>
+
+    <!-- WHERE USER MATCHES WILL BE DISPLAYED -->
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);">100% Matches</span>&nbsp;(People who need what you have, &amp; have what you need).</h1>
+                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);"><?php echo count($matches_100); ?>% Matches</span>&nbsp;(People who need what you have, &amp; have what you need).</h1>
             </div>
         </div>
     </div>
@@ -102,71 +162,48 @@ require_once('nav-main.php');
         <div class="row">
             <div class="col-md-12">
                 <div class="card-group" style="margin-top: 20px;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
+                    <?php foreach ($matches_100 as $match) : ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
+                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
+                                <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
+                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                                <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
+
+
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 50 PERCENT MATACHES-->
+
     <div class="container" style="margin-top: 20px;margin-bottom: 10px;">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);">50% Matches</span>&nbsp;(People who either have what you need, or want what you're offering).</h1>
+                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);"><?php echo count($matches_50); ?>% Matches</span>
+                    &nbsp;(People who either have what you need, or want what you're offering).</h1>
             </div>
             <div class="col-md-12">
                 <div class="card-group" style="margin-top: 20px;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
+                    <?php foreach ($matches_50 as $match) : ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
+                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
+                                <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
+                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                                <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);">Purple Plush Blanket, Snow Shovel, Red Bean Bag</p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - HAMPTON, VA</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
+
+
+
                 </div>
             </div>
         </div>
