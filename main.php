@@ -93,7 +93,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
 
                 <form action="main.php" method="post">
                     <input class="form-control form-control-lg" name="city" type="text" style="width: 250px;margin-top: 10px;margin-bottom: 10px;text-align: center;" placeholder="City">
-                    <select class="bg-light form-select" name="state" value="state" style="width: 250px;height: 48px;font-size: 20px;text-align: center;color: var(--bs-gray);">
+                    <select class="bg-light form-select" name="state_name" value="state" style="width: 250px;height: 48px;font-size: 20px;text-align: center;color: var(--bs-gray);">
                         <optgroup label="State">
                             <option value="AK">AK</option>
                             <option value="AL">AL</option>
