@@ -80,6 +80,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $result = $stmt->get_result();
     $matches = [];
 
+
     while ($row = $result->fetch_assoc()) {
 
         // Add the debugging code here
@@ -87,9 +88,21 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         echo "Matched user needs: {$row['needs_match']}<br>";
         echo "Matched user offers: {$row['offers_match']}<br>";
 
-        $row['needs'] = implode(', ', array_filter(explode(',', $user_needs_offers['needs'])));
-        $row['offers'] = implode(', ', array_filter(explode(',', $user_needs_offers['offers'])));
+        $matched_user_id = $row['user_id'];
+        $sql_needs_offers = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
+            FROM users
+            LEFT JOIN needs ON users.user_id = needs.user_id
+            LEFT JOIN offers ON users.user_id = offers.user_id
+            WHERE users.user_id = ?
+            GROUP BY users.user_id";
+        $stmt_needs_offers = $conn->prepare($sql_needs_offers);
+        $stmt_needs_offers->bind_param("i", $matched_user_id);
+        $stmt_needs_offers->execute();
+        $result_needs_offers = $stmt_needs_offers->get_result();
+        $matched_user_needs_offers = $result_needs_offers->fetch_assoc();
 
+        $row['needs'] = implode(', ', array_filter(explode(',', $matched_user_needs_offers['needs'])));
+        $row['offers'] = implode(', ', array_filter(explode(',', $matched_user_needs_offers['offers'])));
 
         unset($row['needs_match']);
         unset($row['offers_match']);
@@ -106,9 +119,6 @@ function time_elapsed_string($datetime, $full = false)
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
-
-    $diff->w = floor($diff->d / 7);
-    $diff->d -= $diff->w * 7;
 
     $string = array(
         'y' => 'year',
