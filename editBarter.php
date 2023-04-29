@@ -8,12 +8,13 @@ require_once('nav-editBarter.php');
 $current_user_id = $_SESSION['user_id'];
 
 // Fetch the user's needs and offers
-$sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
+$sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs SEPARATOR ', ') as needs, GROUP_CONCAT(DISTINCT offers.offers SEPARATOR ', ') as offers
         FROM users
         LEFT JOIN needs ON users.user_id = needs.user_id
         LEFT JOIN offers ON users.user_id = offers.user_id
         WHERE users.user_id = ?
         GROUP BY users.user_id";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $current_user_id);
 $stmt->execute();
