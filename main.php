@@ -144,7 +144,7 @@ function getTotalUsers($conn, $current_user_id)
 
 // Fetch data and calculate match percentage here
 $total_users = getTotalUsers($conn, $current_user_id);
-$match_percentage = count($matches) / $total_users * 100;
+$match_percentage = count($all_matches) / $total_users * 100;
 
 ?>
 
