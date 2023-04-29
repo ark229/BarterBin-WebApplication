@@ -110,6 +110,12 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         $matches[] = $row;
     }
 
+    // Debugging: Print matches before returning
+    echo "Matches for " . ($full_match ? "100%" : "50%") . ":<br>";
+    foreach ($matches as $match) {
+        echo "User ID: {$match['user_id']}, Needs: {$match['needs']}, Offers: {$match['offers']}<br>";
+    }
+
     return $matches;
 }
 
