@@ -4,7 +4,6 @@ require_once('config.php');
 require_once('session.php');
 require_once('nav.php');
 
-
 ?>
 
 <!DOCTYPE html>
