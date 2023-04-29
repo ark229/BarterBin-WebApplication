@@ -245,7 +245,7 @@ $match_percentage = count($matches_100) / $total_users * 100;
                         </optgroup>
                     </select>
                     <div class="form-check" style="width: 250px;margin-top: 10px;margin-left: 10px;text-align: left;">
-                        <input class="form-check-input" type="checkbox" id="formCheck-1" name="ignore_location"><label class="form-check-label" for="formCheck-1" style="font-size: 18px;">Ignore Location</label>
+                        <input class="form-check-input" type="checkbox" id="formCheck-1" name="ignore_location"><label class="form-check-label" for="formCheck-1" style="font-size: 18px; color: #495057;">Ignore Location</label>
                     </div><button class="btn btn-primary btn-lg" type="submit" style="width: 250px;background: var(--bs-green);margin-top: 10px;margin-left: 0px;margin-bottom: 10px;">Update Results</button>
                 </form>
 
@@ -261,7 +261,7 @@ $match_percentage = count($matches_100) / $total_users * 100;
                     <span style="font-weight: bold;color: var(--bs-teal);">
                         <?php echo round($match_percentage); ?>% Matches
                     </span>
-                    (You have what they need, they need what you have, or both)
+                    (They have what you need, they want what you can offer, or both).
                 </h1>
             </div>
         </div>
@@ -274,9 +274,9 @@ $match_percentage = count($matches_100) / $total_users * 100;
                 <div class="col-md-6" style="margin-bottom: 20px;">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
+                            <h4 class="card-title" style="font-weight: bold; color: #212529;">Their wants:</h4>
                             <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
-                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
+                            <h4 class="card-title" style="font-weight: bold; color: #212529;">Their offers:</h4>
                             <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
                             <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED <?php echo time_elapsed_string($match['date_added']); ?> - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
                         </div>
