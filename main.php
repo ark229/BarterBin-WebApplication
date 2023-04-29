@@ -84,9 +84,6 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         echo "Matched user offers: {$row['offers_match']}<br>";
 
         $matches[] = $row;
-
-
-        $matches[] = $row;
     }
 
     return $matches;
