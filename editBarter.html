@@ -1,19 +1,10 @@
-<?php
-
-require_once('config.php');
-require_once('session.php');
-require_once('nav-editBarter.php');
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en" style="color: var(--bs-cyan);">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Barter Bin - Edit Barter</title>
+    <title>BarginBin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/css/DA_About.css">
@@ -21,11 +12,17 @@ require_once('nav-editBarter.php');
 </head>
 
 <body>
-    <!-- NAV BAR GOES HERE -->
-
-
-
-    <!-- EDIT BARTER -->
+    <nav class="navbar navbar-light navbar-expand-md py-3" style="border-bottom: 3px solid var(--bs-gray-500);">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html" style="width: 340px;height: 230px;"><img src="assets/img/barter-bin-high-resolution-logo-color-on-transparent-background.png" style="width: 330px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="editBarter.html" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Edit Barter</a></li>
+                    <li class="nav-item"><a class="nav-link" href="account.html" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-green);font-weight: bold;font-size: 19px;">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="margin-top: 20px;">
@@ -49,13 +46,12 @@ require_once('nav-editBarter.php');
             </div>
         </div>
     </div>
-
     <footer class="text-center" style="padding-top: 119px;">
         <div class="container text-muted py-4 py-lg-5">
             <ul class="list-inline">
-                <li class="list-inline-item me-4"><a class="link-secondary" href="about.php" target="_blank">About</a></li>
-                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.php" target="_blank">Contact</a></li>
-                <li class="list-inline-item"><a class="link-secondary" href="register.php" target="_blank">Register</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="about.html">About</a></li>
+                <li class="list-inline-item me-4"><a class="link-secondary" href="contact.html">Contact</a></li>
+                <li class="list-inline-item"><a class="link-secondary" href="register.html">Register</a></li>
             </ul>
             <ul class="list-inline">
                 <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
