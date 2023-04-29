@@ -34,13 +34,15 @@ function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $i
     $match_condition = $full_match ? "HAVING needs_match AND offers_match" : "HAVING needs_match OR offers_match";
 
     $sql = "SELECT users.user_id, users.city, users.state_name, needs.needs, offers.offers,
-               (FIND_IN_SET(?, needs.needs) > 0) AS needs_match,
-               (FIND_IN_SET(?, offers.offers) > 0) AS offers_match
-        FROM users
-        INNER JOIN needs ON users.user_id = needs.user_id
-        INNER JOIN offers ON users.user_id = offers.user_id
-        WHERE users.user_id != ? $location_condition
-        $match_condition";
+                   (FIND_IN_SET(?, needs.needs) > 0) AS needs_match,
+                   (FIND_IN_SET(?, offers.offers) > 0) AS offers_match
+            FROM users
+            INNER JOIN needs ON users.user_id = needs.user_id
+            INNER JOIN offers ON users.user_id = offers.user_id
+            WHERE users.user_id != ? $location_condition
+            $match_condition";
+
+    $stmt = $conn->prepare($sql);
 
     if ($ignore_location) {
         $stmt->bind_param("sii", implode(',', $needs), implode(',', $offers), $current_user_id);
@@ -58,6 +60,7 @@ function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $i
 
     return $matches;
 }
+
 ?>
 
 
