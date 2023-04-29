@@ -31,6 +31,13 @@ $user_needs_offers = $result->fetch_assoc();
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
 
+//debugging
+if ($ignore_location) {
+    echo 'When location is ignored:<br>';
+    echo '100% Matches count: ' . count($matches_100) . '<br>';
+    echo '50% Matches count: ' . count($matches_50) . '<br>';
+}
+
 // Add the debugging lines here
 echo '100% Matches count: ' . count($matches_100) . '<br>';
 echo '50% Matches count: ' . count($matches_50) . '<br>';
