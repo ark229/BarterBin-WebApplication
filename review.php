@@ -92,7 +92,7 @@ require_once('nav2.php');
                         </p>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <h3 class="mt-4 mb-3">Write Review Here</h3>
+                        <h3 class="mt-4 mb-3">Write Your Review Here</h3>
                         <button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
                     </div>
                 </div>

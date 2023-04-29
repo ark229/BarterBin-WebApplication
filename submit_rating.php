@@ -1,97 +1,51 @@
 <?php
-require_once('config.php');
+include 'config.php';
 require_once('session.php');
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] == 'load_data') {
+        // Load and process data from the database
+        $query = "SELECT user_rating, user_name, user_review, datetime FROM review_table";
+        $result = $conn->query($query);
+        $review_data = $result->fetch_all(MYSQLI_ASSOC);
 
+        $total_review = count($review_data);
+        $rating_sum = 0;
+        $rating_counts = [0, 0, 0, 0, 0];
 
-$connect = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-
-if (isset($_POST["rating_data"])) {
-
-    $data = array(
-        ':user_name'        =>    $_POST["user_name"],
-        ':user_rating'        =>    $_POST["rating_data"],
-        ':user_review'        =>    $_POST["user_review"],
-        ':datetime'            =>    time()
-    );
-
-    $query = "
-	INSERT INTO review_table 
-	(user_name, user_rating, user_review, datetime) 
-	VALUES (:user_name, :user_rating, :user_review, :datetime)
-	";
-
-    $statement = $connect->prepare($query);
-
-    $statement->execute($data);
-
-    echo "Your Review & Rating was Successfully Submitted";
-}
-
-if (isset($_POST["action"])) {
-    $average_rating = 0;
-    $total_review = 0;
-    $five_star_review = 0;
-    $four_star_review = 0;
-    $three_star_review = 0;
-    $two_star_review = 0;
-    $one_star_review = 0;
-    $total_user_rating = 0;
-    $review_content = array();
-
-    $query = "
-	SELECT * FROM review_table 
-	ORDER BY review_id DESC
-	";
-
-    $result = $connect->query($query, PDO::FETCH_ASSOC);
-
-    foreach ($result as $row) {
-        $review_content[] = array(
-            'user_name'        =>    $row["user_name"],
-            'user_review'    =>    $row["user_review"],
-            'rating'        =>    $row["user_rating"],
-            'datetime'        =>    date('l jS, F Y h:i:s A', $row["datetime"])
-        );
-
-        if ($row["user_rating"] == '5') {
-            $five_star_review++;
+        foreach ($review_data as $review) {
+            $rating_sum += $review['user_rating'];
+            $rating_counts[$review['user_rating'] - 1]++;
         }
 
-        if ($row["user_rating"] == '4') {
-            $four_star_review++;
+        $average_rating = $rating_sum / $total_review;
+
+        $data = [
+            'average_rating' => $average_rating,
+            'total_review' => $total_review,
+            'five_star_review' => $rating_counts[4],
+            'four_star_review' => $rating_counts[3],
+            'three_star_review' => $rating_counts[2],
+            'two_star_review' => $rating_counts[1],
+            'one_star_review' => $rating_counts[0],
+            'review_data' => $review_data
+        ];
+
+        echo json_encode($data);
+    } elseif (isset($_POST['rating_data']) && isset($_POST['user_name']) && isset($_POST['user_review'])) {
+        // Save review to the database
+        $user_name = $conn->real_escape_string($_POST['user_name']);
+        $rating_data = $conn->real_escape_string($_POST['rating_data']);
+        $user_review = $conn->real_escape_string($_POST['user_review']);
+        $datetime = date('Y-m-d H:i:s');
+
+        $query = "INSERT INTO review_table (user_name, user_rating, user_review, datetime) VALUES ('$user_name', '$rating_data', '$user_review', '$datetime')";
+        $result = $conn->query($query);
+
+        if ($result) {
+            echo "Review submitted successfully!";
+        } else {
+            echo "Error submitting review.";
         }
-
-        if ($row["user_rating"] == '3') {
-            $three_star_review++;
-        }
-
-        if ($row["user_rating"] == '2') {
-            $two_star_review++;
-        }
-
-        if ($row["user_rating"] == '1') {
-            $one_star_review++;
-        }
-
-        $total_review++;
-
-        $total_user_rating = $total_user_rating + $row["user_rating"];
     }
-
-    $average_rating = $total_user_rating / $total_review;
-
-    $output = array(
-        'average_rating'    =>    number_format($average_rating, 1),
-        'total_review'        =>    $total_review,
-        'five_star_review'    =>    $five_star_review,
-        'four_star_review'    =>    $four_star_review,
-        'three_star_review'    =>    $three_star_review,
-        'two_star_review'    =>    $two_star_review,
-        'one_star_review'    =>    $one_star_review,
-        'review_data'        =>    $review_content
-    );
-
-    echo json_encode($output);
 }
