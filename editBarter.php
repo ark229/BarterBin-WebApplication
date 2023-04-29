@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
             <div class="col-md-12">
                 <h1 style="font-size: 30px;color: var(--bs-gray);font-weight: bold;">Edit your needs and offers.</h1>
-                <form method="post"><input class="form-control form-control-lg" type="text" style="margin-right: 0px;margin-bottom: 20px;height: 53px;margin-top: 20px;width: 500px;" placeholder="I need this...(separate with a comma)" name="needs"><input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;height: 53px;width: 500px;" placeholder="I can offer this...(separate with a comma)" name="offers"><input class="btn btn-primary" type="submit" style="width: 300px;height: 55px;background: var(--bs-green);font-weight: bold;font-size: 20px;margin-bottom: 20px;" name="submit" value="SAVE"></form>
+                <form method="post"><input class="form-control form-control-lg" type="text" style="margin-right: 0px;margin-bottom: 20px;height: 53px;margin-top: 20px;width: 500px;" placeholder="I need this (separate with a comma)..." name="needs"><input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;height: 53px;width: 500px;" placeholder="I can offer this (separate with a comma)..." name="offers"><input class="btn btn-primary" type="submit" style="width: 300px;height: 55px;background: var(--bs-green);font-weight: bold;font-size: 20px;margin-bottom: 20px;" name="submit" value="SAVE"></form>
             </div>
         </div>
     </div>
