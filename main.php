@@ -300,7 +300,7 @@ $match_percentage = count($matches_100) / $total_users * 100;
                             <h4 class="card-title" style="font-weight: bold; color: #212529;">Their wants:</h4>
                             <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
                             <h4 class="card-title" style="font-weight: bold; color: #212529;">Their offers:</h4>
-                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="mailto:barterbinbuddy@gmail.com?subject=Request%20to%20contact%20user%20<?php echo htmlspecialchars($match['user_id']); ?>" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
                             <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED <?php echo time_elapsed_string($match['date_added']); ?> - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
                         </div>
                     </div>
