@@ -55,6 +55,11 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
             GROUP BY users.user_id
             $match_condition";
 
+    // Add debugging statements here
+    echo "Query: $sql<br>";
+    echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
+    echo "Full match: " . ($full_match ? "true" : "false") . "<br>";
+
     $stmt = $conn->prepare($sql);
 
     if ($ignore_location) {
