@@ -97,6 +97,36 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     return $matches;
 }
 
+function time_elapsed_string($datetime, $full = false)
+{
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
+}
+
 ?>
 
 
@@ -192,7 +222,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);"><?php echo count($matches_100); ?>% Matches</span>&nbsp;(People who need what you have, &amp; have what you need).</h1>
+                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);">Matches</span>&nbsp;(100% and 50% matches combined)</h1>
             </div>
         </div>
     </div>
@@ -200,50 +230,25 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         <div class="row">
             <div class="col-md-12">
                 <div class="card-group" style="margin-top: 20px;">
-                    <?php foreach ($matches_100 as $match) : ?>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs_match']); ?></p>
-                                <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers_match']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                                <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 50 PERCENT MATACHES-->
-
-    <div class="container" style="margin-top: 20px;margin-bottom: 10px;">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);"><?php echo count($matches_50); ?>% Matches</span>
-                    &nbsp;(People who either have what you need, or want what you're offering).</h1>
-            </div>
-            <div class="col-md-12">
-                <div class="card-group" style="margin-top: 20px;">
-                    <?php foreach ($matches_50 as $match) : ?>
+                    <?php
+                    $all_matches = array_merge($matches_100, $matches_50);
+                    foreach ($all_matches as $match) : ?>
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
                                 <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
                                 <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
                                 <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                                <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
+                                <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED <?php echo time_elapsed_string($match['date_added']); ?> - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
-
-
-
                 </div>
             </div>
         </div>
     </div>
+
+
     <footer class="text-center" style="padding-top: 119px;">
         <div class="container text-muted py-4 py-lg-5">
             <ul class="list-inline">
