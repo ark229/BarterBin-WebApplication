@@ -50,13 +50,13 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $match_condition = $full_match ? "HAVING COUNT(needs_match) = COUNT(offers_match)" : "HAVING COUNT(needs_match) > 0 OR COUNT(offers_match) > 0";
 
     $sql = "SELECT users.user_id, users.city, users.state_name,
-                   COUNT(DISTINCT needs.needs) AS needs_match,
-                   COUNT(DISTINCT offers.offers) AS offers_match
+                   COUNT(DISTINCT my_needs.needs) AS needs_match,
+                   COUNT(DISTINCT my_offers.offers) AS offers_match
             FROM users
             INNER JOIN needs ON users.user_id = needs.user_id
             INNER JOIN offers ON users.user_id = offers.user_id
-            INNER JOIN needs AS my_needs ON my_needs.user_id = ? AND needs.needs = my_needs.needs
-            INNER JOIN offers AS my_offers ON my_offers.user_id = ? AND offers.offers = my_offers.offers
+            LEFT JOIN needs AS my_needs ON my_needs.user_id = ? AND needs.needs = my_needs.offers
+            LEFT JOIN offers AS my_offers ON my_offers.user_id = ? AND offers.offers = my_offers.needs
             WHERE users.user_id != ? $location_condition
             GROUP BY users.user_id
             $match_condition";
@@ -84,6 +84,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         echo "Matched user ID: {$row['user_id']}<br>";
         echo "Matched user needs: {$row['needs_match']}<br>";
         echo "Matched user offers: {$row['offers_match']}<br>";
+
 
         $matches[] = $row;
     }
