@@ -32,6 +32,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user_needs_offers = $result->fetch_assoc();
 
+// Add the debugging code here
+echo "Current user needs: {$user_needs_offers['needs']}<br>";
+echo "Current user offers: {$user_needs_offers['offers']}<br>";
+
 // Find 100% and 50% matches
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
@@ -73,6 +77,15 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $matches = [];
 
     while ($row = $result->fetch_assoc()) {
+
+        // Add the debugging code here
+        echo "Matched user ID: {$row['user_id']}<br>";
+        echo "Matched user needs: {$row['needs_match']}<br>";
+        echo "Matched user offers: {$row['offers_match']}<br>";
+
+        $matches[] = $row;
+
+
         $matches[] = $row;
     }
 
