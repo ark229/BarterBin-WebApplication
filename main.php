@@ -22,10 +22,12 @@ echo "City: $city<br>";
 echo "State: $state<br>";
 
 // Fetch the user's needs and offers
-$sql = "SELECT needs, offers FROM users
-        INNER JOIN needs ON users.user_id = needs.user_id
-        INNER JOIN offers ON users.user_id = offers.user_id
-        WHERE users.user_id = ?";
+$sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
+        FROM users
+        LEFT JOIN needs ON users.user_id = needs.user_id
+        LEFT JOIN offers ON users.user_id = offers.user_id
+        WHERE users.user_id = ?
+        GROUP BY users.user_id";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $current_user_id);
 $stmt->execute();
