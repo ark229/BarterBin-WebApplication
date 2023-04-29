@@ -31,6 +31,10 @@ $user_needs_offers = $result->fetch_assoc();
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
 
+// Add the debugging lines here
+error_log('100% Matches count: ' . count($matches_100));
+error_log('50% Matches count: ' . count($matches_50));
+
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
     foreach ($matches_100 as $match_100) {
