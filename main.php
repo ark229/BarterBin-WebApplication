@@ -32,8 +32,8 @@ $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_locat
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
 
 // Add the debugging lines here
-error_log('100% Matches count: ' . count($matches_100));
-error_log('50% Matches count: ' . count($matches_50));
+echo '100% Matches count: ' . count($matches_100) . '<br>';
+echo '50% Matches count: ' . count($matches_50) . '<br>';
 
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
