@@ -72,7 +72,8 @@ $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matc
 function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $full_match)
 {
     $location_condition = $ignore_location ? '' : "AND users.city = ? AND users.state_name = ?";
-    $match_condition = $full_match ? "HAVING (COUNT(needs_match) > 0 AND COUNT(offers_match) > 0)" : "HAVING (COUNT(needs_match) > 0 XOR COUNT(offers_match) > 0)";
+    $match_condition = $full_match ? "HAVING (COUNT(needs_match) > 0 AND COUNT(offers_match) > 0)" : "HAVING (COUNT(needs_match) > 0 OR COUNT(offers_match) > 0)";
+
 
     $sql = "SELECT users.user_id, users.city, users.state_name,
                    COUNT(DISTINCT my_needs.needs) AS needs_match,
