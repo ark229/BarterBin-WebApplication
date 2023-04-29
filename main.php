@@ -81,6 +81,14 @@ echo "Filtered 50% Matches user IDs: " . implode(', ', array_map(function ($matc
 }, $filtered_matches_50)) . ",<br>";
 
 
+// Add debugging statements here
+echo "Current user ID: " . $current_user_id . "<br>";
+echo "City: " . $city . "<br>";
+echo "State: " . $state . "<br>";
+echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
+echo "Full match: " . ($full_match ? "true" : "false") . "<br>";
+
+
 // Function to find matches
 function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $full_match)
 {
@@ -113,6 +121,10 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $stmt->execute();
     $result = $stmt->get_result();
     $matches = [];
+
+    // Add debugging statements here
+    echo "SQL query: " . $sql . "<br>";
+
 
 
     while ($row = $result->fetch_assoc()) {
