@@ -1,11 +1,12 @@
 <?php
+require_once('config.php');
+require_once('session.php');
 
 //submit_rating.php
 
-$connect = new PDO("mysql:host=localhost;dbname=testing", "root", "");
 
-if(isset($_POST["rating_data"]))
-{
+
+if (isset($_POST["rating_data"])) {
 
 	$data = array(
 		':user_name'		=>	$_POST["user_name"],
@@ -25,11 +26,9 @@ if(isset($_POST["rating_data"]))
 	$statement->execute($data);
 
 	echo "Your Review & Rating Successfully Submitted";
-
 }
 
-if(isset($_POST["action"]))
-{
+if (isset($_POST["action"])) {
 	$average_rating = 0;
 	$total_review = 0;
 	$five_star_review = 0;
@@ -47,8 +46,7 @@ if(isset($_POST["action"]))
 
 	$result = $connect->query($query, PDO::FETCH_ASSOC);
 
-	foreach($result as $row)
-	{
+	foreach ($result as $row) {
 		$review_content[] = array(
 			'user_name'		=>	$row["user_name"],
 			'user_review'	=>	$row["user_review"],
@@ -56,35 +54,29 @@ if(isset($_POST["action"]))
 			'datetime'		=>	date('l jS, F Y h:i:s A', $row["datetime"])
 		);
 
-		if($row["user_rating"] == '5')
-		{
+		if ($row["user_rating"] == '5') {
 			$five_star_review++;
 		}
 
-		if($row["user_rating"] == '4')
-		{
+		if ($row["user_rating"] == '4') {
 			$four_star_review++;
 		}
 
-		if($row["user_rating"] == '3')
-		{
+		if ($row["user_rating"] == '3') {
 			$three_star_review++;
 		}
 
-		if($row["user_rating"] == '2')
-		{
+		if ($row["user_rating"] == '2') {
 			$two_star_review++;
 		}
 
-		if($row["user_rating"] == '1')
-		{
+		if ($row["user_rating"] == '1') {
 			$one_star_review++;
 		}
 
 		$total_review++;
 
 		$total_user_rating = $total_user_rating + $row["user_rating"];
-
 	}
 
 	$average_rating = $total_user_rating / $total_review;
@@ -101,7 +93,4 @@ if(isset($_POST["action"]))
 	);
 
 	echo json_encode($output);
-
 }
-
-?>

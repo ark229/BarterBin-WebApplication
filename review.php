@@ -1,3 +1,13 @@
+<?php
+
+require_once('config.php');
+require_once('session.php');
+require_once('nav2.php');
+require_once('submit-rating');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
