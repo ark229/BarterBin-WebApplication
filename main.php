@@ -63,6 +63,9 @@ echo "50% Matches user IDs: " . implode(", ", array_column($matches_50, 'user_id
 
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
+
+
+
     foreach ($matches_100 as $match_100) { // <-- Fix here, use $matches_100 instead of $filtered_matches_50
         if ($match_50['user_id'] === $match_100['user_id']) {
             return false;
@@ -113,6 +116,11 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
 
 
     while ($row = $result->fetch_assoc()) {
+
+        // Add debugging statements here
+        echo "Other user ID: " . $row['user_id'] . "<br>";
+        echo "Other user needs match count: " . $row['needs_match'] . "<br>";
+        echo "Other user offers match count: " . $row['offers_match'] . "<br>";
 
 
         $matched_user_id = $row['user_id'];
