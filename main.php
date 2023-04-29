@@ -38,6 +38,21 @@ if ($ignore_location) {
     echo '50% Matches count: ' . count($matches_50) . '<br>';
 }
 
+if ($ignore_location) {
+    echo '100% Matches user IDs: ';
+    foreach ($matches_100 as $match) {
+        echo $match['user_id'] . ', ';
+    }
+    echo '<br>';
+
+    echo '50% Matches user IDs: ';
+    foreach ($matches_50 as $match) {
+        echo $match['user_id'] . ', ';
+    }
+    echo '<br>';
+}
+
+
 // Add the debugging lines here
 echo '100% Matches count: ' . count($matches_100) . '<br>';
 echo '50% Matches count: ' . count($matches_50) . '<br>';
