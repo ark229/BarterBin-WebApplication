@@ -4,7 +4,70 @@ require_once('config.php');
 require_once('session.php');
 require_once('nav-editBarter.php');
 
+
+$current_user_id = $_SESSION['user_id'];
+
+// Fetch the user's needs and offers
+$sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
+        FROM users
+        LEFT JOIN needs ON users.user_id = needs.user_id
+        LEFT JOIN offers ON users.user_id = offers.user_id
+        WHERE users.user_id = ?
+        GROUP BY users.user_id";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $current_user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_needs_offers = $result->fetch_assoc();
+
+$current_needs = htmlspecialchars($user_needs_offers['needs']);
+$current_offers = htmlspecialchars($user_needs_offers['offers']);
+
+// Process the form data
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $needs = $_POST['needs'] ?? '';
+    $offers = $_POST['offers'] ?? '';
+
+    // Update the user's needs and offers in the database
+
+    // First, delete the existing needs and offers
+    $sql_delete_needs = "DELETE FROM needs WHERE user_id = ?";
+    $stmt_delete_needs = $conn->prepare($sql_delete_needs);
+    $stmt_delete_needs->bind_param("i", $current_user_id);
+    $stmt_delete_needs->execute();
+
+    $sql_delete_offers = "DELETE FROM offers WHERE user_id = ?";
+    $stmt_delete_offers = $conn->prepare($sql_delete_offers);
+    $stmt_delete_offers->bind_param("i", $current_user_id);
+    $stmt_delete_offers->execute();
+
+    // Now, insert the new needs and offers
+    $needs_array = explode(',', $needs);
+    $offers_array = explode(',', $offers);
+    $date_added = date("Y-m-d H:i:s"); // Get the current date and time in the required format
+
+
+    foreach ($needs_array as $need) {
+        $sql_insert_need = "INSERT INTO needs (user_id, needs, date_added) VALUES (?, ?, NOW())";
+        $stmt_insert_need = $conn->prepare($sql_insert_need);
+        $stmt_insert_need->bind_param("is", $current_user_id, $need);
+        $stmt_insert_need->execute();
+    }
+
+    foreach ($offers_array as $offer) {
+        $sql_insert_offer = "INSERT INTO offers (user_id, offers, date_added) VALUES (?, ?, NOW())";
+        $stmt_insert_offer = $conn->prepare($sql_insert_offer);
+        $stmt_insert_offer->bind_param("is", $current_user_id, $offer);
+        $stmt_insert_offer->execute();
+    }
+
+
+    // Redirect to the View Barter page
+    header("Location: main.php");
+    exit();
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -36,8 +99,8 @@ require_once('nav-editBarter.php');
     <div class="container" style="margin-top: 60px;margin-bottom: 60px;">
         <div class="row">
             <div class="col-md-12">
-                <p style="color: var(--bs-gray);font-size: 21px;"><span style="color: var(--bs-black);">Your Current Needs:&nbsp;</span>&nbsp;car detailing, maid</p>
-                <p style="color: var(--bs-gray);font-size: 21px;"><span style="color: var(--bs-black);">Your Current Offers:&nbsp;</span>&nbsp;car detailing, maid</p>
+                <p style="color: var(--bs-gray);font-size: 21px;"><span style="color: var(--bs-black);">Your Current Needs:&nbsp;</span>&nbsp;<?php echo $current_needs; ?></p>
+                <p style="color: var(--bs-gray);font-size: 21px;"><span style="color: var(--bs-black);">Your Current Offers:&nbsp;</span>&nbsp;<?php echo $current_offers; ?></p>
             </div>
         </div>
     </div>
@@ -45,7 +108,7 @@ require_once('nav-editBarter.php');
         <div class="row">
             <div class="col-md-12">
                 <h1 style="font-size: 30px;color: var(--bs-gray);font-weight: bold;">Edit your needs and offers.</h1>
-                <form><input class="form-control form-control-lg" type="text" style="margin-right: 0px;margin-bottom: 20px;height: 53px;margin-top: 20px;width: 500px;" placeholder="I need this..." name="needs"><input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;height: 53px;width: 500px;" placeholder="I can offer this..." name="offers"><input class="btn btn-primary" type="submit" style="width: 300px;height: 55px;background: var(--bs-green);font-weight: bold;font-size: 20px;margin-bottom: 20px;" name="submit" value="SAVE"></form>
+                <form method="post"><input class="form-control form-control-lg" type="text" style="margin-right: 0px;margin-bottom: 20px;height: 53px;margin-top: 20px;width: 500px;" placeholder="I need this..." name="needs"><input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;height: 53px;width: 500px;" placeholder="I can offer this..." name="offers"><input class="btn btn-primary" type="submit" style="width: 300px;height: 55px;background: var(--bs-green);font-weight: bold;font-size: 20px;margin-bottom: 20px;" name="submit" value="SAVE"></form>
             </div>
         </div>
     </div>
