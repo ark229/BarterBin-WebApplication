@@ -241,29 +241,32 @@ $match_percentage = count($matches) / $total_users * 100;
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="font-size: 28px;color: var(--bs-gray-800);"><span style="font-weight: bold;color: var(--bs-teal);">Matches</span>&nbsp;(100% and 50% matches combined)</h1>
+                <h1 style="font-size: 28px;color: var(--bs-gray-800);">
+                    <span style="font-weight: bold;color: var(--bs-teal);">
+                        <?php echo round($match_percentage); ?>% Matches
+                    </span>
+                    (You have what they need, they need what you have, or both)
+                </h1>
             </div>
         </div>
     </div>
     <div class="container" style="margin-bottom: 25px;">
         <div class="row">
-            <div class="col-md-12">
-                <div class="card-group" style="margin-top: 20px;">
-                    <?php
-                    $all_matches = array_merge($matches_100, $matches_50);
-                    foreach ($all_matches as $match) : ?>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
-                                <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
-                                <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED <?php echo time_elapsed_string($match['date_added']); ?> - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
-                            </div>
+            <?php
+            $all_matches = array_merge($matches_100, $matches_50);
+            foreach ($all_matches as $match) : ?>
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
+                            <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
+                            <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                            <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED <?php echo time_elapsed_string($match['date_added']); ?> - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
