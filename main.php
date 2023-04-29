@@ -57,6 +57,10 @@ if ($ignore_location) {
 echo '100% Matches count: ' . count($matches_100) . '<br>';
 echo '50% Matches count: ' . count($matches_50) . '<br>';
 
+echo "100% Matches user IDs: " . implode(", ", array_column($matches_100, 'user_id')) . "<br>";
+echo "50% Matches user IDs: " . implode(", ", array_column($matches_50, 'user_id')) . "<br>";
+
+
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
     foreach ($matches_100 as $match_100) { // <-- Fix here, use $matches_100 instead of $filtered_matches_50
