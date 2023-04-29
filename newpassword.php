@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_password = $_POST['passwd'] ?? '';
 
     $email = $_SESSION['reset_email'];
-    $sql = "UPDATE users SET password = ? WHERE email = ?";
+    $sql = "UPDATE users SET passwd = ? WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $new_password, $email);
     $stmt->execute();
