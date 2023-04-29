@@ -2,7 +2,7 @@
 require_once('config.php');
 require_once('session.php');
 
-//submit-rating.php
+
 
 $connect = new PDO("mysql:host=localhost;dbname=testing", "root", "");
 

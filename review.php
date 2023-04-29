@@ -33,7 +33,7 @@ require_once('nav2.php');
     <div class="container">
         <h1 class="mt-5 mb-5">Ratings and Reviews</h1>
         <div class="card">
-            <div class="card-header">Sample Product</div>
+            <div class="card-header">Tells us about your experience!</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-4 text-center">
