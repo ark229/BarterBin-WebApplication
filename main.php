@@ -52,7 +52,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $sql = "SELECT users.user_id, users.city, users.state_name,
                    COUNT(DISTINCT my_needs.needs) AS needs_match,
                    COUNT(DISTINCT my_offers.offers) AS offers_match,
-                   GREATEST(MAX(my_needs.date_added), MAX(my_offers.date_added)) as date_added
+                   users.date_added as date_added
             FROM users
             INNER JOIN needs ON users.user_id = needs.user_id
             INNER JOIN offers ON users.user_id = offers.user_id
@@ -87,8 +87,9 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         echo "Matched user needs: {$row['needs_match']}<br>";
         echo "Matched user offers: {$row['offers_match']}<br>";
 
-        $row['needs'] = implode(', ', array_filter(explode(',', $row['needs_match'])));
-        $row['offers'] = implode(', ', array_filter(explode(',', $row['offers_match'])));
+        $row['needs'] = implode(', ', array_filter(explode(',', $user_needs_offers['needs'])));
+        $row['offers'] = implode(', ', array_filter(explode(',', $user_needs_offers['offers'])));
+
 
         unset($row['needs_match']);
         unset($row['offers_match']);
@@ -149,7 +150,7 @@ $total_users = getTotalUsers($conn, $current_user_id);
 $all_matches = array_merge($matches_100, $matches_50);
 
 // Calculate match percentage
-$match_percentage = count($all_matches) / $total_users * 100;
+$match_percentage = count($matches_100) / $total_users * 100;
 
 ?>
 
