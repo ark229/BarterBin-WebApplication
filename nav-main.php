@@ -40,7 +40,7 @@ echo '</pre>';
                 <ul class="navbar-nav ms-auto">
                     <?php if (isset($_SESSION['user_id'])) : ?>
                         <li class="nav-item"><a class="nav-link active" href="editBarter.php" style="font-weight: bold;color: var(--bs-green);font-size: 20px;">Edit Barter</a></li>
-                        <li class="nav-item"><a class="nav-link" href="account.php" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="logout.php" style="color: var(--bs-green);font-weight: bold;font-size: 19px;">Logout</a></li>
                     <?php else : ?>
                         <li class="nav-item"><a class="nav-link" href="login.php" style="color: var(--bs-green);font-weight: bold;font-size: 20px;">Login</a></li>
