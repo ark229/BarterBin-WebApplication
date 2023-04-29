@@ -28,44 +28,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $needs = $_POST['needs'] ?? '';
     $offers = $_POST['offers'] ?? '';
 
-    // Update the user's needs and offers in the database
+    // If the needs input is not empty
+    if (!empty($needs)) {
+        // First, delete the existing needs
+        $sql_delete_needs = "DELETE FROM needs WHERE user_id = ?";
+        $stmt_delete_needs = $conn->prepare($sql_delete_needs);
+        $stmt_delete_needs->bind_param("i", $current_user_id);
+        $stmt_delete_needs->execute();
 
-    // First, delete the existing needs and offers
-    $sql_delete_needs = "DELETE FROM needs WHERE user_id = ?";
-    $stmt_delete_needs = $conn->prepare($sql_delete_needs);
-    $stmt_delete_needs->bind_param("i", $current_user_id);
-    $stmt_delete_needs->execute();
-
-    $sql_delete_offers = "DELETE FROM offers WHERE user_id = ?";
-    $stmt_delete_offers = $conn->prepare($sql_delete_offers);
-    $stmt_delete_offers->bind_param("i", $current_user_id);
-    $stmt_delete_offers->execute();
-
-    // Now, insert the new needs and offers
-    $needs_array = explode(',', $needs);
-    $offers_array = explode(',', $offers);
-    $date_added = date("Y-m-d H:i:s"); // Get the current date and time in the required format
-
-
-    foreach ($needs_array as $need) {
-        $sql_insert_need = "INSERT INTO needs (user_id, needs, date_added) VALUES (?, ?, NOW())";
-        $stmt_insert_need = $conn->prepare($sql_insert_need);
-        $stmt_insert_need->bind_param("is", $current_user_id, $need);
-        $stmt_insert_need->execute();
+        // Now, insert the new needs
+        $needs_array = explode(',', $needs);
+        foreach ($needs_array as $need) {
+            $sql_insert_need = "INSERT INTO needs (user_id, needs, date_added) VALUES (?, ?, NOW())";
+            $stmt_insert_need = $conn->prepare($sql_insert_need);
+            $stmt_insert_need->bind_param("is", $current_user_id, $need);
+            $stmt_insert_need->execute();
+        }
     }
 
-    foreach ($offers_array as $offer) {
-        $sql_insert_offer = "INSERT INTO offers (user_id, offers, date_added) VALUES (?, ?, NOW())";
-        $stmt_insert_offer = $conn->prepare($sql_insert_offer);
-        $stmt_insert_offer->bind_param("is", $current_user_id, $offer);
-        $stmt_insert_offer->execute();
-    }
+    // If the offers input is not empty
+    if (!empty($offers)) {
+        // First, delete the existing offers
+        $sql_delete_offers = "DELETE FROM offers WHERE user_id = ?";
+        $stmt_delete_offers = $conn->prepare($sql_delete_offers);
+        $stmt_delete_offers->bind_param("i", $current_user_id);
+        $stmt_delete_offers->execute();
 
+        // Now, insert the new offers
+        $offers_array = explode(',', $offers);
+        foreach ($offers_array as $offer) {
+            $sql_insert_offer = "INSERT INTO offers (user_id, offers, date_added) VALUES (?, ?, NOW())";
+            $stmt_insert_offer = $conn->prepare($sql_insert_offer);
+            $stmt_insert_offer->bind_param("is", $current_user_id, $offer);
+            $stmt_insert_offer->execute();
+        }
+    }
 
     // Redirect to the View Barter page
     header("Location: main.php");
     exit();
 }
+
 ?>
 
 
