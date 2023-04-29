@@ -3,7 +3,7 @@
 require_once('config.php');
 require_once('session.php');
 require_once('nav2.php');
-require_once('submit-rating');
+require_once('submit_rating');
 
 ?>
 
