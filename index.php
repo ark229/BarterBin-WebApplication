@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <?php
 
 require_once('config.php');
@@ -17,15 +15,17 @@ if ($_POST['needs'] != '' && $_POST['offers'] != '') {
 
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-  <title>Bargin Bin - Save Your Money & Barter Today!</title>
+  <title>>Bargin Bin - Save Your Money & Barter Today!</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css" />
   <link rel="stylesheet" href="assets/css/DA_About.css" />
+  <link rel="stylesheet" href="assets/css/Hover-Button-1.css" />
   <link rel="stylesheet" href="assets/css/Navbar-Centered-Brand-icons.css" />
 </head>
 
@@ -36,71 +36,89 @@ if ($_POST['needs'] != '' && $_POST['offers'] != '') {
       --bs-light-rgb: 200, 204, 208;
       --bs-body-color: #eff1f4;
     ">
-  <!-- NAV GOES HERE -->
-
-  <div class="container" style="padding-bottom: 27px">
+  <div class="container" style="padding-bottom: 27px; margin-bottom: 50px">
     <div class="row">
       <div class="col-md-12" style="padding-bottom: 0px; padding-top: 30px">
-        <h1 style="color: #4d4b4b; text-align: center; padding-top: 11px">
+        <h1 style="
+              color: var(--bs-orange);
+              text-align: center;
+              padding-top: 11px;
+              font-size: 50px;
+              font-weight: bold;
+            ">
           Need Something? Find a barter mate today!
         </h1>
       </div>
     </div>
   </div>
-
-  <form action="" method="POST">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="input-group">
-            <input class="form-control form-control-lg" name="needs" type="text" placeholder="I need this...." style="border-width: 3px" minlength="3" required="" />
-          </div>
+  <div class="container" style="margin-top: 0px">
+    <div class="row" style="margin-top: 0px">
+      <div class="col-md-6">
+        <h1 style="
+              border-color: var(--bs-secondary);
+              color: var(--bs-secondary);
+              text-align: center;
+            ">
+          New User?
+        </h1>
+        <div style="text-align: center">
+          <a class="text-center d-flex justify-content-center align-items-xxl-center btn btn-sm animated-button victoria-one" href="register.php" style="
+                margin-bottom: 20px;
+                margin-top: 50px;
+                height: 400px;
+                width: 300px;
+                font-size: 29px;
+                border-color: var(--bs-teal);
+              ">Register here!</a>
         </div>
-        <div class="col-md-4">
-          <div class="input-group">
-            <input class="form-control form-control-lg" name="offers" type="text" placeholder="I can offer this..." style="border-width: 3px" minlength="3" required="" />
-          </div>
-        </div>
-        <div class="col-md-4" style="padding-top: 0px">
-          <div class="btn-group" role="group"></div>
-          <input class="btn btn-lg btn-primary" name="step1" type="submit" style="
-                width: 265px;
-                height: 53px;
-                background: var(--bs-orange);
-                margin-top: 0px;
-                margin-bottom: 10px;
-                margin-right: 0px;
-              " value="Find Match" />
+      </div>
+      <div class="col-md-6">
+        <h1 style="
+              border-color: var(--bs-secondary);
+              color: var(--bs-secondary);
+              text-align: center;
+            ">
+          Already a Member?
+        </h1>
+        <div style="text-align: center">
+          <a class="text-center d-flex justify-content-center align-items-xxl-center btn btn-sm animated-button victoria-one" href="login.php" style="
+                margin-bottom: 20px;
+                margin-top: 50px;
+                height: 400px;
+                width: 300px;
+                font-size: 29px;
+                border-color: var(--bs-teal);
+              ">Welcome back!</a>
         </div>
       </div>
     </div>
-  </form>
-
+  </div>
   <div class="container" style="padding-bottom: 10px">
     <div class="row">
       <div class="col-md-12" style="padding-top: 69px; padding-bottom: 12px">
         <p style="
               text-align: center;
-              font-size: 20px;
+              font-size: 26px;
               color: var(--bs-gray);
               font-weight: bold;
             ">
-          Separate your needs &amp; offers with a comma:&nbsp;<span style="color: var(--bs-green); font-style: italic">washer, oven, roughly used car</span>
+          No matter the offer or need we'll get it for you:&nbsp;<span style="color: var(--bs-green); font-style: italic">washer, oven, or even a roughly used car!</span>
         </p>
       </div>
     </div>
   </div>
+
   <footer class="text-center" style="padding-top: 119px">
     <div class="container text-muted py-4 py-lg-5">
       <ul class="list-inline">
         <li class="list-inline-item me-4">
-          <a class="link-secondary" href="about.php">About</a>
+          <a class="link-secondary" href="about.php" target="_blank">About</a>
         </li>
         <li class="list-inline-item me-4">
-          <a class="link-secondary" href="contact.php">Contact</a>
+          <a class="link-secondary" href="contact.php" target="_blank">Contact</a>
         </li>
         <li class="list-inline-item">
-          <a class="link-secondary" href="register.php">Register</a>
+          <a class="link-secondary" href="register.php" target="_blank">Register</a>
         </li>
       </ul>
       <ul class="list-inline">
