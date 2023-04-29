@@ -86,7 +86,8 @@ echo "Current user ID: " . $current_user_id . "<br>";
 echo "City: " . $city . "<br>";
 echo "State: " . $state . "<br>";
 echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
-echo "Full match: " . ($full_match ? "true" : "false") . "<br>";
+echo "Full match: " . ($match_condition === "HAVING (COUNT(needs_match) > 0 AND COUNT(offers_match) > 0)" ? "true" : "false") . "<br>";
+
 
 
 // Function to find matches
