@@ -3,24 +3,27 @@
 require_once('config.php');
 require_once('session.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'] ?? '';
-
-    $sql = "SELECT email FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $_SESSION['reset_email'] = $email;
-        header("Location: newpassword.php");
-        exit();
-    } else {
-        $error = "Email not found";
-    }
+if (!isset($_SESSION['reset_email'])) {
+    echo "Unauthorized access";
+    exit();
 }
-?>
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $new_password = $_POST['passwd'] ?? '';
+
+    $email = $_SESSION['reset_email'];
+    $sql = "UPDATE users SET password = ? WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $new_password, $email);
+    $stmt->execute();
+
+    echo "<script>
+        alert('You have successfully changed your password. Please login to your barter account.');
+        window.location.href = 'login.php';
+    </script>";
+
+    session_destroy();
+}
 
 ?>
 
@@ -30,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Barter Bin - Reset Password</title>
+    <title>Barter Bin - New Password</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/css/DA_About.css">
@@ -52,18 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container" style="margin-top: 20px;">
         <div class="row">
             <div class="col-md-12" style="padding-right: 12px;">
-                <h1 style="text-align: center;color: var(--bs-gray-700);">RESET YOUR PASSWORD</h1>
+                <h1 style="text-align: center;color: var(--bs-gray-700);">Email Validation Successful!</h1>
             </div>
         </div>
     </div>
 
-    <!-- RESET password -->
-
+    <!-- New password -->
     <div class="container" style="margin-top: 50px;margin-bottom: 20px;">
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form action="" method="post"><label class="form-label" style="font-size: 20px;">Enter email address to reset password:</label><input class="form-control form-control-lg" name="email" type="email" style="margin-bottom: 25px;"><input class="btn btn-primary" type="submit" style="width: 416px;height: 60px;margin-top: 10px;margin-bottom: 10px;color: var(--bs-white);font-size: 27px;background: var(--bs-teal);font-weight: bold;"></form>
+                <form action="" method="post"><label class="form-label" style="font-size: 20px;">Enter your new password:</label><input class="form-control form-control-lg" name="passwd" type="password"><input class="btn btn-primary" type="submit" style="width: 416px;height: 60px;margin-top: 10px;margin-bottom: 10px;color: var(--bs-white);font-size: 27px;background: var(--bs-teal);font-weight: bold;"></form>
             </div>
             <div class="col-md-4"></div>
         </div>
