@@ -12,14 +12,6 @@ $city = $_POST['city'] ?? '';
 $state = $_POST['state_name'] ?? '';
 $ignore_location = isset($_POST['ignore_location']) ? true : false;
 
-// Add the debugging statements here
-if ($ignore_location) {
-    echo "Ignore location is checked<br>";
-} else {
-    echo "Ignore location is not checked<br>";
-}
-echo "City: $city<br>";
-echo "State: $state<br>";
 
 // Fetch the user's needs and offers
 $sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
@@ -34,9 +26,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user_needs_offers = $result->fetch_assoc();
 
-// Add the debugging code here
-echo "Current user needs: {$user_needs_offers['needs']}<br>";
-echo "Current user offers: {$user_needs_offers['offers']}<br>";
 
 // Find 100% and 50% matches
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
@@ -73,11 +62,6 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
             $match_condition";
 
 
-    // Add debugging statements here
-    echo "Query: $sql<br>";
-    echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
-    echo "Full match: " . ($full_match ? "true" : "false") . "<br>";
-
     $stmt = $conn->prepare($sql);
 
     if ($ignore_location) {
@@ -93,10 +77,6 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
 
     while ($row = $result->fetch_assoc()) {
 
-        // Add the debugging code here
-        echo "Matched user ID: {$row['user_id']}<br>";
-        echo "Matched user needs: {$row['needs_match']}<br>";
-        echo "Matched user offers: {$row['offers_match']}<br>";
 
         $matched_user_id = $row['user_id'];
         $sql_needs_offers = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
@@ -118,12 +98,6 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         unset($row['offers_match']);
 
         $matches[] = $row;
-    }
-
-    // Debugging: Print matches before returning
-    echo "Matches for " . ($full_match ? "100%" : "50%") . ":<br>";
-    foreach ($matches as $match) {
-        echo "User ID: {$match['user_id']}, Needs: {$match['needs']}, Offers: {$match['offers']}<br>";
     }
 
     return $matches;
