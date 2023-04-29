@@ -99,6 +99,7 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     return $matches;
 }
 
+//Function to get time elapsed
 function time_elapsed_string($datetime, $full = false)
 {
     $now = new DateTime;
@@ -128,6 +129,22 @@ function time_elapsed_string($datetime, $full = false)
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
+// Function to get the total number of users
+function getTotalUsers($conn, $current_user_id)
+{
+    $sql = "SELECT COUNT(*) as total_users FROM users WHERE user_id != ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $current_user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total_users'];
+}
+
+// Fetch data and calculate match percentage here
+$total_users = getTotalUsers($conn, $current_user_id);
+$match_percentage = count($matches) / $total_users * 100;
 
 ?>
 
