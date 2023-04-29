@@ -7,10 +7,18 @@ require_once('nav-main.php');
 // Get the current user ID (you should replace this with the ID of the logged-in user)
 $current_user_id = $_SESSION['user_id'];
 
-// Process the form data
-$city = $_POST['city'] ?? '';
-$state = $_POST['state_name'] ?? '';
-$ignore_location = isset($_POST['ignore_location']) ? true : false;
+// Get the current user's city and state
+$sql = "SELECT city, state_name FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $current_user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_location = $result->fetch_assoc();
+
+$city = $user_location['city'];
+$state = $user_location['state_name'];
+$ignore_location = false;
+
 
 // Fetch the user's needs and offers
 $sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
@@ -77,6 +85,9 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
             WHERE users.user_id != ? $location_condition
             GROUP BY users.user_id
             $match_condition";
+
+
+
 
 
     $stmt = $conn->prepare($sql);
