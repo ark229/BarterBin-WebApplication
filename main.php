@@ -24,30 +24,34 @@ $result = $stmt->get_result();
 $user_needs_offers = $result->fetch_assoc();
 
 // Find 100% and 50% matches
-$matches_100 = findMatches($conn, $current_user_id, $user_needs_offers['needs'], $user_needs_offers['offers'], $city, $state, $ignore_location, true);
-$matches_50 = findMatches($conn, $current_user_id, $user_needs_offers['needs'], $user_needs_offers['offers'], $city, $state, $ignore_location, false);
+$matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
+$matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
+
 
 // Function to find matches
-function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $ignore_location, $full_match)
+function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $full_match)
 {
     $location_condition = $ignore_location ? '' : "AND users.city = ? AND users.state_name = ?";
-    $match_condition = $full_match ? "HAVING needs_match AND offers_match" : "HAVING needs_match OR offers_match";
+    $match_condition = $full_match ? "HAVING COUNT(needs_match) = COUNT(offers_match)" : "HAVING COUNT(needs_match) > 0 OR COUNT(offers_match) > 0";
 
-    $sql = "SELECT users.user_id, users.city, users.state_name, needs.needs, offers.offers,
-                   (FIND_IN_SET(?, needs.needs) > 0) AS needs_match,
-                   (FIND_IN_SET(?, offers.offers) > 0) AS offers_match
+    $sql = "SELECT users.user_id, users.city, users.state_name,
+                   COUNT(DISTINCT needs.needs) AS needs_match,
+                   COUNT(DISTINCT offers.offers) AS offers_match
             FROM users
             INNER JOIN needs ON users.user_id = needs.user_id
             INNER JOIN offers ON users.user_id = offers.user_id
+            INNER JOIN needs AS my_needs ON my_needs.user_id = ? AND needs.needs = my_needs.needs
+            INNER JOIN offers AS my_offers ON my_offers.user_id = ? AND offers.offers = my_offers.offers
             WHERE users.user_id != ? $location_condition
+            GROUP BY users.user_id
             $match_condition";
 
     $stmt = $conn->prepare($sql);
 
     if ($ignore_location) {
-        $stmt->bind_param("sii", $needs, $offers, $current_user_id);
+        $stmt->bind_param("iii", $current_user_id, $current_user_id, $current_user_id);
     } else {
-        $stmt->bind_param("siiss", $needs, $offers, $current_user_id, $city, $state);
+        $stmt->bind_param("iiiss", $current_user_id, $current_user_id, $current_user_id, $city, $state);
     }
 
     $stmt->execute();
@@ -60,6 +64,7 @@ function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $i
 
     return $matches;
 }
+
 
 
 ?>
