@@ -12,7 +12,6 @@ $city = $_POST['city'] ?? '';
 $state = $_POST['state_name'] ?? '';
 $ignore_location = isset($_POST['ignore_location']) ? true : false;
 
-
 // Fetch the user's needs and offers
 $sql = "SELECT GROUP_CONCAT(DISTINCT needs.needs) as needs, GROUP_CONCAT(DISTINCT offers.offers) as offers
         FROM users
@@ -26,47 +25,25 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user_needs_offers = $result->fetch_assoc();
 
-
 // Find 100% and 50% matches
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
 
-//debugging
-if ($ignore_location) {
-    echo 'When location is ignored:<br>';
-    echo '100% Matches count: ' . count($matches_100) . '<br>';
-    echo '50% Matches count: ' . count($matches_50) . '<br>';
-}
+// Debugging output
+echo "Current user ID: " . $current_user_id . "<br>";
+echo "City: " . $city . "<br>";
+echo "State: " . $state . "<br>";
+echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
 
-if ($ignore_location) {
-    echo '100% Matches user IDs: ';
-    foreach ($matches_100 as $match) {
-        echo $match['user_id'] . ', ';
-    }
-    echo '<br>';
-
-    echo '50% Matches user IDs: ';
-    foreach ($matches_50 as $match) {
-        echo $match['user_id'] . ', ';
-    }
-    echo '<br>';
-}
-
-
-// Add the debugging lines here
 echo '100% Matches count: ' . count($matches_100) . '<br>';
 echo '50% Matches count: ' . count($matches_50) . '<br>';
 
 echo "100% Matches user IDs: " . implode(", ", array_column($matches_100, 'user_id')) . "<br>";
 echo "50% Matches user IDs: " . implode(", ", array_column($matches_50, 'user_id')) . "<br>";
 
-
 // Filter the 50% matches to exclude users already in the 100% matches
 $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
-
-
-
-    foreach ($matches_100 as $match_100) { // <-- Fix here, use $matches_100 instead of $filtered_matches_50
+    foreach ($matches_100 as $match_100) {
         if ($match_50['user_id'] === $match_100['user_id']) {
             return false;
         }
@@ -74,19 +51,10 @@ $filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matc
     return true;
 });
 
-
-//debugging filtered matches
+// Debugging filtered matches
 echo "Filtered 50% Matches user IDs: " . implode(', ', array_map(function ($match) {
     return $match['user_id'];
 }, $filtered_matches_50)) . ",<br>";
-
-
-// Add debugging statements here
-echo "Current user ID: " . $current_user_id . "<br>";
-echo "City: " . $city . "<br>";
-echo "State: " . $state . "<br>";
-echo "Ignore location: " . ($ignore_location ? "true" : "false") . "<br>";
-echo "Full match: " . ($match_condition === "HAVING (COUNT(needs_match) > 0 AND COUNT(offers_match) > 0)" ? "true" : "false") . "<br>";
 
 
 
