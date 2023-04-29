@@ -45,9 +45,9 @@ function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $i
     $stmt = $conn->prepare($sql);
 
     if ($ignore_location) {
-        $stmt->bind_param("sii", implode(',', $needs), implode(',', $offers), $current_user_id);
+        $stmt->bind_param("sii", $needs, $offers, $current_user_id);
     } else {
-        $stmt->bind_param("siiss", implode(',', $needs), implode(',', $offers), $current_user_id, $city, $state);
+        $stmt->bind_param("siiss", $needs, $offers, $current_user_id, $city, $state);
     }
 
     $stmt->execute();
@@ -60,6 +60,7 @@ function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $i
 
     return $matches;
 }
+
 
 ?>
 
