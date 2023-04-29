@@ -130,8 +130,14 @@ function time_elapsed_string($datetime, $full = false)
         's' => 'second',
     );
     foreach ($string as $k => &$v) {
-        if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        if ($k === 'w') {
+            $value = floor($diff->d / 7);
+        } else {
+            $value = $diff->$k;
+        }
+
+        if ($value) {
+            $v = $value . ' ' . $v . ($value > 1 ? 's' : '');
         } else {
             unset($string[$k]);
         }
