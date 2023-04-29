@@ -4,7 +4,7 @@ require_once('session.php');
 
 
 
-$connect = new PDO("mysql:host=localhost;dbname=testing", "root", "");
+$connect = new PDO("config.php");
 
 if (isset($_POST["rating_data"])) {
 
