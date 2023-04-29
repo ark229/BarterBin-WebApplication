@@ -36,19 +36,16 @@ function findMatches($conn, $current_user_id, $needs, $offers, $city, $state, $i
     $sql = "SELECT users.user_id, users.city, users.state_name, needs.needs, offers.offers,
                (FIND_IN_SET(?, needs.needs) > 0) AS needs_match,
                (FIND_IN_SET(?, offers.offers) > 0) AS offers_match
-               FROM users
-               INNER JOIN needs ON users.user_id = needs.user_id
-               INNER JOIN offers ON users.user_id = offers.user_id
-               WHERE users.user_id != ? $location_condition
-               $match_condition";
-
-
-    $stmt = $conn->prepare($sql);
+        FROM users
+        INNER JOIN needs ON users.user_id = needs.user_id
+        INNER JOIN offers ON users.user_id = offers.user_id
+        WHERE users.user_id != ? $location_condition
+        $match_condition";
 
     if ($ignore_location) {
-        $stmt->bind_param("ssi", $offers, $needs, $current_user_id);
+        $stmt->bind_param("sii", implode(',', $needs), implode(',', $offers), $current_user_id);
     } else {
-        $stmt->bind_param("ssiiss", $offers, $needs, $current_user_id, $city, $state);
+        $stmt->bind_param("siiss", implode(',', $needs), implode(',', $offers), $current_user_id, $city, $state);
     }
 
     $stmt->execute();
