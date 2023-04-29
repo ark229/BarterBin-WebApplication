@@ -42,6 +42,16 @@ echo "Current user offers: {$user_needs_offers['offers']}<br>";
 $matches_100 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, true);
 $matches_50 = findMatches($conn, $current_user_id, $city, $state, $ignore_location, false);
 
+// Filter the 50% matches to exclude users already in the 100% matches
+$filtered_matches_50 = array_filter($matches_50, function ($match_50) use ($matches_100) {
+    foreach ($matches_100 as $match_100) {
+        if ($match_50['user_id'] === $match_100['user_id']) {
+            return false;
+        }
+    }
+    return true;
+});
+
 
 // Function to find matches
 function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $full_match)
@@ -169,27 +179,7 @@ function getTotalUsers($conn, $current_user_id)
 $total_users = getTotalUsers($conn, $current_user_id);
 
 // Merge the two matches arrays
-$all_matches = array_merge($matches_100, $matches_50);
-$all_matches = remove_duplicates_by_user_id($all_matches);
-
-
-
-// Remove duplicates from the $all_matches array
-function remove_duplicates_by_user_id($matches)
-{
-    $unique_matches = array();
-    $user_ids = array();
-
-    foreach ($matches as $match) {
-        if (!in_array($match['user_id'], $user_ids)) {
-            $user_ids[] = $match['user_id'];
-            $unique_matches[] = $match;
-        }
-    }
-
-    return $unique_matches;
-}
-
+$all_matches = array_merge($matches_100, $filtered_matches_50);
 
 // Calculate match percentage
 $match_percentage = count($matches_100) / $total_users * 100;
