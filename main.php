@@ -55,8 +55,8 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
             FROM users
             INNER JOIN needs ON users.user_id = needs.user_id
             INNER JOIN offers ON users.user_id = offers.user_id
-            LEFT JOIN needs AS my_needs ON my_needs.user_id = ? AND needs.needs = my_needs.offers
-            LEFT JOIN offers AS my_offers ON my_offers.user_id = ? AND offers.offers = my_offers.needs
+            LEFT JOIN needs AS my_needs ON my_needs.user_id = ? AND needs.needs = my_needs.needs
+            LEFT JOIN offers AS my_offers ON my_offers.user_id = ? AND offers.offers = my_offers.offers
             WHERE users.user_id != ? $location_condition
             GROUP BY users.user_id
             $match_condition";
