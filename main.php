@@ -50,8 +50,8 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     $match_condition = $full_match ? "HAVING COUNT(needs_match) = COUNT(offers_match)" : "HAVING COUNT(needs_match) > 0 OR COUNT(offers_match) > 0";
 
     $sql = "SELECT users.user_id, users.city, users.state_name,
-                   COUNT(DISTINCT my_needs.needs) AS needs_match,
-                   COUNT(DISTINCT my_offers.offers) AS offers_match
+                   GROUP_CONCAT(DISTINCT my_needs.needs) AS needs_match,
+                   GROUP_CONCAT(DISTINCT my_offers.offers) AS offers_match
             FROM users
             INNER JOIN needs ON users.user_id = needs.user_id
             INNER JOIN offers ON users.user_id = offers.user_id
@@ -85,6 +85,11 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
         echo "Matched user needs: {$row['needs_match']}<br>";
         echo "Matched user offers: {$row['offers_match']}<br>";
 
+        $row['needs'] = implode(', ', array_filter(explode(',', $row['needs_match'])));
+        $row['offers'] = implode(', ', array_filter(explode(',', $row['offers_match'])));
+
+        unset($row['needs_match']);
+        unset($row['offers_match']);
 
         $matches[] = $row;
     }
@@ -92,9 +97,8 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
     return $matches;
 }
 
-
-
 ?>
+
 
 
 <!DOCTYPE html>
