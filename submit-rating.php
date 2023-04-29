@@ -4,7 +4,7 @@ require_once('session.php');
 
 //submit_rating.php
 
-
+$connect = new PDO("mysql:host=localhost;dbname=testing", "root", "");
 
 if (isset($_POST["rating_data"])) {
 
@@ -25,7 +25,7 @@ if (isset($_POST["rating_data"])) {
 
 	$statement->execute($data);
 
-	echo "Your Review & Rating Successfully Submitted";
+	echo "Your Review & Rating was Successfully Submitted";
 }
 
 if (isset($_POST["action"])) {
