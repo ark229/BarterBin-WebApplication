@@ -200,15 +200,13 @@ function findMatches($conn, $current_user_id, $city, $state, $ignore_location, $
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title" style="font-weight: bold;">Their wants:</h4>
-                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs']); ?></p>
+                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['needs_match']); ?></p>
                                 <h4 class="card-title" style="font-weight: bold;">Their offers:</h4>
-                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
+                                <p class="wantsOffers" style="font-size: 18px;color: var(--bs-gray-600);"><?php echo htmlspecialchars($match['offers_match']); ?></p><a href="#" style="text-align: left;font-size: 25px;color: var(--bs-orange);font-weight: bold;">Contact Barter Buddy</a>
                                 <p class="barter-data" style="color: var(--bs-gray-500);font-size: 14px;">POSTED 10 HOURS AGO - <?php echo htmlspecialchars($match['city'] . ', ' . $match['state_name']); ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
-
-
                 </div>
             </div>
         </div>
