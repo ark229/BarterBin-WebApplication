@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("iss", $rating, $name, $review);
 
     if ($stmt->execute()) {
-        echo "Review submitted successfully!";
+        echo "";
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -229,7 +229,7 @@ $conn->close();
         }
 
         .review-text {
-            color: #495057;
+            color: #6c757d;
             ;
         }
     </style>
