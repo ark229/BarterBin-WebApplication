@@ -225,8 +225,7 @@ require_once('nav2.php');
         submitStars.forEach(star => {
             star.addEventListener('click', () => {
                 const rating = parseInt(star.dataset.rating);
-                document.getElementById('rating_input').value = rating;
-
+                document.getElementById('rating').value = rating;
 
                 submitStars.forEach(s => {
                     s.classList.remove('text-warning');
