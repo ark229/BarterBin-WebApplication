@@ -26,7 +26,8 @@ $result = $conn->query("SELECT rating, name, review FROM reviews");
 $reviews = [];
 $total_rating = 0;
 $total_reviews = 0;
-$star_count = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+$star_count = array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0);
+
 
 while ($row = $result->fetch_assoc()) {
     $reviews[] = $row;
@@ -266,8 +267,72 @@ $conn->close();
             <p class="mb-0">Copyright © 2023 Barter Bin</p>
         </div>
     </footer>
+
+    <script>
+        $(document).ready(function() {
+            $(".submit_star").on("click", function() {
+                var rating = $(this).data("rating");
+                $("#rating").val(rating);
+                $(".submit_star").removeClass("text-warning");
+                for (var i = 1; i <= rating; i++) {
+                    $("#submit_star_" + i).addClass("text-warning");
+                }
+            });
+
+            // Display fetched data
+            var reviews = <?php echo json_encode($reviews); ?>;
+            var averageRating = <?php echo $average_rating; ?>;
+            var totalReviews = <?php echo $total_reviews; ?>;
+            var percentageRatings = <?php echo json_encode($percentage_ratings); ?>;
+            displayFetchedData(reviews, averageRating, totalReviews, percentageRatings);
+        });
+
+        function displayFetchedData(reviews, averageRating, totalReviews, percentageRatings) {
+            $("#average_rating").text(averageRating);
+            $("#total_review").text(totalReviews);
+
+            $("#total_five_star_review").text(percentageRatings[5]);
+            $("#total_four_star_review").text(percentageRatings[4]);
+            $("#total_three_star_review").text(percentageRatings[3]);
+            $("#total_two_star_review").text(percentageRatings[2]);
+            $("#total_one_star_review").text(percentageRatings[1]);
+
+            $("#five_star_progress").css("width", percentageRatings[5] + "%");
+            $("#four_star_progress").css("width", percentageRatings[4] + "%");
+            $("#three_star_progress").css("width", percentageRatings[3] + "%");
+            $("#two_star_progress").css("width", percentageRatings[2] + "%");
+            $("#one_star_progress").css("width", percentageRatings[1] + "%");
+
+            // Set main stars
+            var mainStars = Math.round(averageRating);
+            $(".main_star").removeClass("text-warning");
+            for (var i = 1; i <= mainStars; i++) {
+                $(".main_star:nth-child(" + i + ")").addClass("text-warning");
+            }
+
+            // Display review content
+            var reviewContent = "";
+            for (var i = 0; i < reviews.length; i++) {
+                reviewContent += '<div class="card mt-3"><div class="card-header">';
+                for (var j = 1; j <= 5; j++) {
+                    if (j <= reviews[i].rating) {
+                        reviewContent += '<i class="fas fa-star text-warning mr-1"></i>';
+                    } else {
+                        reviewContent += '<i class="fas fa-star star-light mr-1"></i>';
+                    }
+                }
+                reviewContent += '</div><div class="card-body"><h5 class="card-title">' + reviews[i].name + '</h5><p class="card-text">' + reviews[i].review + '</p></div></div>';
+            }
+            $("#review_content").html(reviewContent);
+        }
+    </script>
+
+
+
+
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/Animated-Type-Heading-type-headline.js"></script>
+
 </body>
 
 </html>
