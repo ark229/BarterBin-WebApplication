@@ -37,7 +37,7 @@ require_once('nav.php');
               font-size: 50px;
               font-weight: bold;
             ">
-          Need Something? Find a barter mate today!
+          Need Something? Find a barter buddy today!
         </h1>
       </div>
     </div>
