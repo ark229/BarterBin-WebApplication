@@ -19,13 +19,25 @@ require_once('nav2.php');
     <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/css/DA_About.css">
     <link rel="stylesheet" href="assets/css/Navbar-Centered-Brand-icons.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+    <style>
+        .star-light {
+            color: #d4d4d4;
+        }
+
+        .text-warning {
+            color: #ffc107;
+        }
+    </style>
 </head>
+
 
 <body style="color: var(--bs-orange);">
     <!-- NAV GOES HERE -->
@@ -50,10 +62,10 @@ require_once('nav2.php');
                         </div>
                         <h3><span id="total_review">0</span> Review</h3>
                     </div>
+
                     <div class="col-sm-4">
                         <p>
                         <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
-
                         <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
@@ -61,23 +73,23 @@ require_once('nav2.php');
                         </p>
                         <p>
                         <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
-
                         <div class="progress-label-right">(<span id="total_four_star_review">0</span>)</div>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
                         </div>
                         </p>
+
                         <p>
                         <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
-
                         <div class="progress-label-right">(<span id="total_three_star_review">0</span>)</div>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
                         </div>
                         </p>
+
+
                         <p>
                         <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
-
                         <div class="progress-label-right">(<span id="total_two_star_review">0</span>)</div>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
@@ -85,259 +97,178 @@ require_once('nav2.php');
                         </p>
                         <p>
                         <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
-
                         <div class="progress-label-right">(<span id="total_one_star_review">0</span>)</div>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
                         </div>
                         </p>
                     </div>
+
                     <div class="col-sm-4 text-center">
                         <h3 class="mt-4 mb-3">Write Your Review Here</h3>
-                        <button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
+                        <form action="submit_review.php" method="post" id="review_form">
+                            <input type="hidden" name="rating" id="rating" value="">
+                            <div class="form-group">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter Your Name" required />
+                            </div>
+                            <div class="form-group">
+                                <textarea name="review" id="review" class="form-control" placeholder="Type Review Here" required></textarea>
+                            </div>
+                            <div class="form-group text-center mt-4">
+                                <button type="submit" class="btn btn-primary" id="save_review">Submit</button>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>
+
         <div class="mt-5" id="review_content"></div>
     </div>
+
+    <div id="review_modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Submit Review</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="submit_review.php" method="post" id="review_modal_form">
+                        <h4 class="text-center mt-2 mb-4">
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
+                            <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
+                        </h4>
+                        <input type="hidden" name="rating" id="modal_rating" value="">
+                        <div class="form-group">
+                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" required />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here" required></textarea>
+                        </div>
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" class="btn btn-primary" id="save_review">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .progress-label-left {
+            float: left;
+            margin-right: 0.5em;
+            line-height: 1em;
+        }
+
+        .progress-label-right {
+            float: right;
+            margin-left: 0.3em;
+            line-height: 1em;
+        }
+
+        .star-light {
+            color: #e9ecef;
+        }
+    </style>
+
+    <script>
+        function updateReviewsAndRatings() {
+            fetch('fetch_reviews.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Update average rating, total reviews, and progress bars
+                    document.getElementById('average_rating').textContent = data.average_rating;
+                    document.getElementById('total_review').textContent = data.total_reviews;
+
+                    for (let i = 1; i <= 5; i++) {
+                        document.getElementById(`total_${i}_star_review`).textContent = data.star_count[i];
+                        document.getElementById(`${i}_star_progress`).style.width = `${data.percentage_ratings[i]}%`;
+                    }
+
+                    // Display the reviews
+                    let reviewContent = '';
+                    data.reviews.forEach(review => {
+                        reviewContent += `
+                    <div class="card mb-3">
+                        <div class="card-header">${review.name}</div>
+                        <div class="card-body">
+                            <h5>${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</h5>
+                            <p>${review.review}</p>
+                        </div>
+                    </div>`;
+                    });
+                    document.getElementById('review_content').innerHTML = reviewContent;
+                });
+        }
+
+        // Fetch and display reviews when the page loads
+        updateReviewsAndRatings();
+
+        // Add event listener for the "Review" button
+        document.getElementById('add_review').addEventListener('click', () => {
+            document.getElementById('review_modal').style.display = 'block';
+        });
+
+        // Close the review modal when the close button is clicked
+        document.querySelector('#review_modal .close').addEventListener('click', () => {
+            document.getElementById('review_modal').style.display = 'none';
+        });
+
+        // Handle star rating selection
+        const submitStars = document.querySelectorAll('.submit_star');
+        submitStars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.dataset.rating);
+                document.getElementById('rating_input').value = rating;
+
+                submitStars.forEach(s => {
+                    s.classList.remove('text-warning');
+                    s.classList.add('star-light');
+                });
+
+                for (let i = 0; i < rating; i++) {
+                    submitStars[i].classList.remove('star-light');
+                    submitStars[i].classList.add('text-warning');
+                }
+            });
+        });
+
+        // Fetch and display reviews when the form is submitted
+        document.getElementById('review_form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            fetch('submit_review.php', {
+                    method: 'POST',
+                    body: new FormData(e.target)
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    e.target.reset();
+                    updateReviewsAndRatings();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+
+
 </body>
 
 </html>
 
-<div id="review_modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Submit Review</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h4 class="text-center mt-2 mb-4">
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
-                    <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
-                </h4>
-                <div class="form-group">
-                    <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
-                </div>
-                <div class="form-group">
-                    <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
-                </div>
-                <div class="form-group text-center mt-4">
-                    <button type="button" class="btn btn-primary" id="save_review">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<style>
-    .progress-label-left {
-        float: left;
-        margin-right: 0.5em;
-        line-height: 1em;
-    }
 
-    .progress-label-right {
-        float: right;
-        margin-left: 0.3em;
-        line-height: 1em;
-    }
 
-    .star-light {
-        color: #e9ecef;
-    }
-</style>
 
-<script>
-    $(document).ready(function() {
-
-                var rating_data = 0;
-
-                $('#add_review').click(function() {
-
-                    $('#review_modal').modal('show');
-
-                });
-
-                $(document).on('mouseenter', '.submit_star', function() {
-
-                    var rating = $(this).data('rating');
-
-                    reset_background();
-
-                    for (var count = 1; count <= rating; count++) {
-
-                        $('#submit_star_' + count).addClass('text-warning');
-
-                    }
-
-                });
-
-                function reset_background() {
-                    for (var count = 1; count <= 5; count++) {
-
-                        $('#submit_star_' + count).addClass('star-light');
-
-                        $('#submit_star_' + count).removeClass('text-warning');
-
-                    }
-                }
-
-                $(document).on('mouseleave', '.submit_star', function() {
-
-                    reset_background();
-
-                    for (var count = 1; count <= rating_data; count++) {
-
-                        $('#submit_star_' + count).removeClass('star-light');
-
-                        $('#submit_star_' + count).addClass('text-warning');
-                    }
-
-                });
-
-                $(document).on('click', '.submit_star', function() {
-
-                    rating_data = $(this).data('rating');
-
-                });
-
-                $('#save_review').click(function() {
-
-                    var user_name = $('#user_name').val();
-
-                    var user_review = $('#user_review').val();
-
-                    if (user_name == '' || user_review == '') {
-                        alert("Please Fill Both Field");
-                        return false;
-                    } else {
-                        $.ajax({
-                            url: "submit_rating.php",
-                            method: "POST",
-                            data: {
-                                rating_data: rating_data,
-                                user_name: user_name,
-                                user_review: user_review
-                            },
-                            success: function(data) {
-                                $('#review_modal').modal('hide');
-
-                                load_rating_data();
-
-                                alert(data);
-                            }
-                        })
-                    }
-
-                });
-
-                load_rating_data();
-
-                function load_rating_data() {
-                    $.ajax({
-                        url: "submit_rating.php",
-                        method: "POST",
-                        data: {
-                            action: 'load_data'
-                        },
-                        dataType: "JSON",
-                        success: function(data) {
-                            $('#average_rating').text(data.average_rating);
-                            $('#total_review').text(data.total_review);
-
-                            var count_star = 0;
-
-                            $('.main_star').each(function() {
-                                count_star++;
-                                if (Math.ceil(data.average_rating) >= count_star) {
-                                    $(this).addClass('text-warning');
-                                    $(this).addClass('star-light');
-                                }
-                            });
-
-                            $('#total_five_star_review').text(data.five_star_review);
-
-                            $('#total_four_star_review').text(data.four_star_review);
-
-                            $('#total_three_star_review').text(data.three_star_review);
-
-                            $('#total_two_star_review').text(data.two_star_review);
-
-                            $('#total_one_star_review').text(data.one_star_review);
-
-                            $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
-
-                            $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
-
-                            $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
-
-                            $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
-
-                            $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
-
-                            if (data.review_data.length > 0) {
-                                var html = '';
-
-                                for (var count = 0; count < data.review_data.length; count++) {
-                                    html += '<div class="row mb-3">';
-
-                                    html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].user_name.charAt(0) + '</h3></div></div>';
-
-                                    html += '<div class="col-sm-11">';
-
-                                    html += '<div class="card">';
-
-                                    html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
-
-                                    html += '<div class="card-body">';
-
-                                    for (var star = 1; star <= 5; star++) {
-                                        var class_name = '';
-
-                                        if (data.review_data[count].rating >= star) {
-                                            class_name = 'text-warning';
-                                        } else {
-                                            class_name = 'star-light';
-                                        }
-
-                                        html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
-                                    }
-
-                                    html += '<br />';
-
-                                    html += data.review_data[count].user_review;
-
-                                    html += '</div>';
-
-                                    html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
-
-                                    html += '</div>';
-
-                                    html += '</div>';
-
-                                    html += '</div>';
-                                }
-
-                                $('#review_content').html(html);
-                            } else {
-                                // If there are no reviews, display a message
-                                $('#review_content').html('<p>No reviews yet!</p>');
-                            }
-                        },
-                        error: function() {
-                            // If there was an error loading the data, display an error message
-                            $('#review_content').html('<p>There was an error loading the reviews.</p>');
-                        }
-                    });
-                }
-</script>
 
 
 

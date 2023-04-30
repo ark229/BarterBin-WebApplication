@@ -141,6 +141,7 @@ function time_elapsed_string($datetime, $full = false)
         'i' => 'minute',
         's' => 'second',
     );
+
     foreach ($string as $k => &$v) {
         if ($k === 'w') {
             $value = floor($diff->d / 7);
@@ -179,7 +180,6 @@ $all_matches = array_merge($matches_100, $filtered_matches_50);
 
 // Calculate match percentage
 $match_percentage = count($matches_100) / $total_users * 100;
-
 
 ?>
 
