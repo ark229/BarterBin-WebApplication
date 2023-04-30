@@ -85,7 +85,7 @@ $conn->close();
 
 
     <div class="container">
-        <h1 class="mt-5 mb-5">Ratings and Reviews</h1>
+        <h1 class="mt-5 mb-5" style="color: #198754;">Ratings and Reviews</h1>
         <div class="card">
             <div class="card-header">Tells us about your experience!</div>
             <div class="card-body">
@@ -101,7 +101,7 @@ $conn->close();
                             <i class="fas fa-star star-light mr-1 main_star"></i>
                             <i class="fas fa-star star-light mr-1 main_star"></i>
                         </div>
-                        <h3><span id="total_review">0</span> Review</h3>
+                        <h3><span id="total_review">0</span> Reviews</h3>
                     </div>
 
                     <div class="col-sm-4">
@@ -163,7 +163,7 @@ $conn->close();
                                 <textarea name="review" id="review" class="form-control" placeholder="Type Review Here" required></textarea>
                             </div>
                             <div class="form-group text-center mt-4">
-                                <button type="submit" class="btn btn-primary" id="save_review">Submit</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #198754;" id="save_review">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -226,6 +226,11 @@ $conn->close();
 
         .star-light {
             color: #e9ecef;
+        }
+
+        .review-text {
+            color: #495057;
+            ;
         }
     </style>
 
@@ -321,7 +326,7 @@ $conn->close();
                         reviewContent += '<i class="fas fa-star star-light mr-1"></i>';
                     }
                 }
-                reviewContent += '</div><div class="card-body"><h5 class="card-title">' + fetchedReviews[i].name + '</h5><p class="card-text">' + fetchedReviews[i].review + '</p></div></div>';
+                reviewContent += '</div><div class="card-body"><h5 class="card-title">' + fetchedReviews[i].name + '</h5><p class="card-text review-text">' + fetchedReviews[i].review + '</p></div></div>';
             }
             $("#review_content").html(reviewContent);
         }
