@@ -1,12 +1,52 @@
 <?php
-
-require_once('config.php');
 require_once('session.php');
 require_once('nav2.php');
+include 'config.php';
 
+// Submit the review
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $rating = $_POST['rating'];
+    $name = $_POST['name'];
+    $review = $_POST['review'];
+
+    $stmt = $conn->prepare("INSERT INTO reviews (rating, name, review) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $rating, $name, $review);
+
+    if ($stmt->execute()) {
+        echo "Review submitted successfully!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+$result = $conn->query("SELECT rating, name, review FROM reviews");
+
+$reviews = [];
+$total_rating = 0;
+$total_reviews = 0;
+$star_count = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+
+while ($row = $result->fetch_assoc()) {
+    $reviews[] = $row;
+    $total_rating += $row['rating'];
+    $total_reviews++;
+    $star_count[$row['rating']]++;
+}
+
+$average_rating = $total_reviews > 0 ? round($total_rating / $total_reviews, 1) : 0;
+$percentage_ratings = array_map(function ($count) use ($total_reviews) {
+    return $total_reviews > 0 ? round(($count / $total_reviews) * 100, 1) : 0;
+}, $star_count);
+
+$conn->close();
 
 ?>
 
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,7 +146,7 @@ require_once('nav2.php');
 
                     <div class="col-sm-4 text-center">
                         <h3 class="mt-4 mb-3">Write Your Review Here</h3>
-                        <form action="submit_review.php" method="post" id="review_form">
+                        <form action="review.php" method="post" id="review_form" name="review_form">
                             <input type="hidden" name="rating" id="rating" value="">
                             <h4 class="text-center mt-2 mb-4">
                                 <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
@@ -126,6 +166,7 @@ require_once('nav2.php');
                             </div>
                         </form>
                     </div>
+
 
 
                 </div>
@@ -187,71 +228,6 @@ require_once('nav2.php');
         }
     </style>
 
-    <script>
-        function updateReviewsAndRatings() {
-            fetch('fetch_reviews.php')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(text => {
-                    try {
-                        const data = JSON.parse(text);
-                        // ... (rest of the function)
-                    } catch (error) {
-                        console.error('Invalid JSON:', text);
-                        throw error;
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-
-
-        // Fetch and display reviews when the page loads
-        updateReviewsAndRatings();
-
-        // Handle star rating selection
-        const submitStars = document.querySelectorAll('.submit_star');
-        submitStars.forEach(star => {
-            star.addEventListener('click', () => {
-                const rating = parseInt(star.dataset.rating);
-                document.getElementById('rating').value = rating;
-
-                submitStars.forEach(s => {
-                    s.classList.remove('text-warning');
-                    s.classList.add('star-light');
-                });
-
-                for (let i = 0; i < rating; i++) {
-                    submitStars[i].classList.remove('star-light');
-                    submitStars[i].classList.add('text-warning');
-                }
-            });
-        });
-
-        // Fetch and display reviews when the form is submitted
-        document.getElementById('review_form').addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            fetch('submit_review.php', {
-                    method: 'POST',
-                    body: new FormData(e.target)
-                })
-                .then(response => response.text())
-                .then(result => {
-                    alert(result);
-                    e.target.reset();
-                    submitStars.forEach(s => {
-                        s.classList.remove('text-warning');
-                        s.classList.add('star-light');
-                    });
-                    updateReviewsAndRatings();
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
 
     <footer class="text-center" style="padding-top: 119px">
         <hr style="height: 2px; color: #214a80; background-color: #172f76" />
