@@ -190,32 +190,24 @@ require_once('nav2.php');
     <script>
         function updateReviewsAndRatings() {
             fetch('fetch_reviews.php')
-                .then(response => response.json())
-                .then(data => {
-                    // Update average rating, total reviews, and progress bars
-                    document.getElementById('average_rating').textContent = data.average_rating;
-                    document.getElementById('total_review').textContent = data.total_reviews;
-
-                    for (let i = 1; i <= 5; i++) {
-                        document.getElementById(`total_${i}_star_review`).textContent = data.star_count[i];
-                        document.getElementById(`${i}_star_progress`).style.width = `${data.percentage_ratings[i]}%`;
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-
-                    // Display the reviews
-                    let reviewContent = '';
-                    data.reviews.forEach(review => {
-                        reviewContent += `
-                <div class="card mb-3">
-                    <div class="card-header">${review.name}</div>
-                    <div class="card-body">
-                        <h5>${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</h5>
-                        <p>${review.review}</p>
-                    </div>
-                </div>`;
-                    });
-                    document.getElementById('review_content').innerHTML = reviewContent;
-                });
+                    return response.text();
+                })
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        // ... (rest of the function)
+                    } catch (error) {
+                        console.error('Invalid JSON:', text);
+                        throw error;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
+
 
         // Fetch and display reviews when the page loads
         updateReviewsAndRatings();
