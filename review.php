@@ -280,14 +280,14 @@ $conn->close();
             });
 
             // Display fetched data
-            var reviews = <?php echo json_encode($reviews); ?>;
+            var fetchedReviews = <?php echo json_encode($reviews); ?>;
             var averageRating = <?php echo $average_rating; ?>;
             var totalReviews = <?php echo $total_reviews; ?>;
             var percentageRatings = <?php echo json_encode($percentage_ratings); ?>;
-            displayFetchedData(reviews, averageRating, totalReviews, percentageRatings);
+            displayFetchedData(fetchedReviews, averageRating, totalReviews, percentageRatings);
         });
 
-        function displayFetchedData(reviews, averageRating, totalReviews, percentageRatings) {
+        function displayFetchedData(fetchedReviews, averageRating, totalReviews, percentageRatings) {
             $("#average_rating").text(averageRating);
             $("#total_review").text(totalReviews);
 
@@ -312,16 +312,16 @@ $conn->close();
 
             // Display review content
             var reviewContent = "";
-            for (var i = 0; i < reviews.length; i++) {
+            for (var i = 0; i < fetchedReviews.length; i++) {
                 reviewContent += '<div class="card mt-3"><div class="card-header">';
                 for (var j = 1; j <= 5; j++) {
-                    if (j <= reviews[i].rating) {
+                    if (j <= fetchedReviews[i].rating) {
                         reviewContent += '<i class="fas fa-star text-warning mr-1"></i>';
                     } else {
                         reviewContent += '<i class="fas fa-star star-light mr-1"></i>';
                     }
                 }
-                reviewContent += '</div><div class="card-body"><h5 class="card-title">' + reviews[i].name + '</h5><p class="card-text">' + reviews[i].review + '</p></div></div>';
+                reviewContent += '</div><div class="card-body"><h5 class="card-title">' + fetchedReviews[i].name + '</h5><p class="card-text">' + fetchedReviews[i].review + '</p></div></div>';
             }
             $("#review_content").html(reviewContent);
         }
