@@ -1,8 +1,7 @@
 <?php
-
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 
 include 'config.php';
 
@@ -25,7 +24,8 @@ $percentage_ratings = array_map(function ($count) use ($total_reviews) {
     return $total_reviews > 0 ? round(($count / $total_reviews) * 100, 1) : 0;
 }, $star_count);
 
-header('Content-Type: application/json');
+header('Content-Type: text/plain');
+echo "JSON data:\n";
 echo json_encode([
     'reviews' => $reviews,
     'average_rating' => $average_rating,
@@ -33,5 +33,8 @@ echo json_encode([
     'star_count' => $star_count,
     'percentage_ratings' => $percentage_ratings
 ]);
+echo "\nUnexpected content:\n";
+ob_start();
+var_dump(ob_get_clean());
 
 $conn->close();
