@@ -111,6 +111,7 @@ require_once('nav.php');
         <li class="list-inline-item">
           <a class="link-secondary" href="register.php" target="_blank">Register</a>
         </li>
+        <li class="list-inline-item"><a class="link-secondary" href="review.php">Leave Review</a></li>
       </ul>
       <ul class="list-inline">
         <li class="list-inline-item me-4">

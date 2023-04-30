@@ -123,6 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li class="list-inline-item me-4"><a class="link-secondary" href="about.php" target="_blank">About</a></li>
                 <li class="list-inline-item me-4"><a class="link-secondary" href="contact.php" target="_blank">Contact</a></li>
                 <li class="list-inline-item"><a class="link-secondary" href="register.php" target="_blank">Register</a></li>
+                <li class="list-inline-item"><a class="link-secondary" href="review.php">Leave Review</a></li>
             </ul>
             <ul class="list-inline">
                 <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
