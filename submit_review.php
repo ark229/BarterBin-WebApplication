@@ -1,10 +1,11 @@
 <?php
 
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-include 'config.php';
+require_once('config.php');
+require_once('session.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rating = $_POST['rating'];
