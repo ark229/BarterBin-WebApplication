@@ -103,13 +103,13 @@ require_once('nav.php');
     <div class="container text-muted py-4 py-lg-5">
       <ul class="list-inline">
         <li class="list-inline-item me-4">
-          <a class="link-secondary" href="about.php" target="_blank">About</a>
+          <a class="link-secondary" href="about.php">About</a>
         </li>
         <li class="list-inline-item me-4">
-          <a class="link-secondary" href="contact.php" target="_blank">Contact</a>
+          <a class="link-secondary" href="contact.php">Contact</a>
         </li>
         <li class="list-inline-item">
-          <a class="link-secondary" href="register.php" target="_blank">Register</a>
+          <a class="link-secondary" href="register.php">Register</a>
         </li>
         <li class="list-inline-item"><a class="link-secondary" href="review.php">Leave Review</a></li>
       </ul>
