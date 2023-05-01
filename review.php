@@ -85,7 +85,7 @@ $conn->close();
 
 
     <div class="container">
-        <h1 class="mt-5 mb-5" style="color: #198754;">Ratings and Reviews</h1>
+        <h1 class="mt-5 mb-5" style="color: #198754; font-weight: bold;">Ratings and Reviews</h1>
         <div class="card">
             <div class="card-header">Tells us about your experience!</div>
             <div class="card-body">
