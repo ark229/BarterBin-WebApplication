@@ -280,7 +280,7 @@ $match_percentage = count($matches_100) / $total_users * 100;
                     <span style="font-weight: bold;color: var(--bs-teal);">
                         <?php echo round($match_percentage); ?>% Matches
                     </span>
-                    (They have what you need, they want what you can offer, or both).
+                    (You have what they need, they need what you have, or you share a location).
                 </h1>
             </div>
         </div>
