@@ -34,6 +34,8 @@
                     <a class="btn btn-light me-2" role="button" style="font-weight: bold; background: var(--bs-teal)">LOGIN</a>
                 </div>
             </div>
+
+            <!--
             <div class="d-none d-md-block">
                 <a class="btn btn-light me-2" role="button" style="
               --bs-secondary: #6c757d;
@@ -50,6 +52,9 @@
               margin-left: -36px;
             " href="login.php">LOGIN HERE</a>
             </div>
+-->
+
+
         </div>
     </nav>
     <div class="container" style="padding-bottom: 27px">
