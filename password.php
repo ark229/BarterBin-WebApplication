@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form action="" method="post"><label class="form-label" style="font-size: 20px;">Enter email address to reset password:</label><input class="form-control form-control-lg" name="email" type="email" style="margin-bottom: 25px;"><input class="btn btn-primary" type="submit" style="width: 416px;height: 60px;margin-top: 10px;margin-bottom: 10px;color: var(--bs-white);font-size: 27px;background: var(--bs-teal);font-weight: bold;"></form>
+                <form action="" method="post"><label class="form-label" style="font-size: 20px;">Enter email address to reset password:</label><input class="form-control form-control-lg" name="email" type="email" style="margin-bottom: 25px;"><input class="btn btn-primary" type="submit" value="Submit" style="width: 416px;height: 60px;margin-top: 10px;margin-bottom: 10px;color: var(--bs-white);font-size: 27px;background: var(--bs-teal);font-weight: bold;"></form>
             </div>
             <div class="col-md-4"></div>
         </div>
