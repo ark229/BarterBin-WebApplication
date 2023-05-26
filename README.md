@@ -36,3 +36,8 @@ to traditional cash-based transactions.
 5. Database: MySQL Workbench / Heroku ClearDB
 6. Bootstrap CSS framework, which helps in providing a responsive layout that adapts to different screen sizes.
 
+## Live Site Preview
+
+https://github.com/ark229/BarterBin-WebApplication/assets/40047791/536e88d8-a7b2-4626-943a-4ca796ed6602
+
+
