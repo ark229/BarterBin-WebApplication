@@ -25,6 +25,7 @@ to traditional cash-based transactions.
 7. About page
 8. Rating and Review page
 9. Forgot Password
+10. Custom design, layout, and content
 
 
 ## Languages and Frameworks
